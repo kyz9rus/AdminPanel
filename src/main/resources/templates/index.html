@@ -3,8 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#loginBlock").load("html/loginBlock.html");
+        });
+    </script>
 </head>
 <body>
-    hello
+<div class="wrapper">
+    <div class="wrapperForFooter">
+
+        <div class="header featurebox col-md-12 col-sm-12 col-xs-12">
+            <div class="row" align="center">
+
+                <div class="name col-md-10 col-sm-10 col-xs-10">
+                    <p class="mainText">Welcome to the Banner Page!</p>
+                </div>
+
+                <div class="loginBlock col-md-2 col-sm-2 col-xs-2">
+                    <div id="loginBlock"></div>
+                    <p class="greeting">{{#greeting}} {{.}} {{/greeting}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!--List of banners-->
+        </div>
+
+        <div class="footer">
+            2018
+        </div>
+
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </body>
 </html>
