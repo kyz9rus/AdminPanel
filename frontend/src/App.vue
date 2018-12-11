@@ -3,7 +3,18 @@
     <div id="app" class="wrapperForFooter">
       <app-header></app-header>
       <div class="content">
-        HELLO
+
+        <!--List of banners-->
+        <!--<app-listOfBanners></app-listOfBanners>-->
+        <nav>
+          <router-link class="btn btn-primary" to="/">Banners</router-link>
+          <!--<router-link class="btn btn-primary" to="/add">Add</router-link>-->
+          <router-link class="btn btn-primary" to="/search">Search</router-link>
+        </nav>
+
+        <br/>
+        <router-view/>
+
       </div>
 
       <app-footer></app-footer>
@@ -28,7 +39,6 @@ export default {
 
   .content{
     flex: 1 0 auto;
-    height: 470px;
     margin: 50px auto !important;
     padding: 10px;
   }
