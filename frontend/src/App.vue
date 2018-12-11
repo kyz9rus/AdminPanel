@@ -1,7 +1,13 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png"/>
-    <router-view/>
+  <div class="wrapper">
+    <div id="app" class="wrapperForFooter">
+      <app-header></app-header>
+      <div class="content">
+        HELLO
+      </div>
+
+      <app-footer></app-footer>
+    </div>
   </div>
 </template>
 
@@ -12,12 +18,23 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import 'assets/css/bootstrap.min.css';
+
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .content{
+    flex: 1 0 auto;
+    height: 470px;
+    margin: 50px auto !important;
+    padding: 10px;
+  }
+
+  .wrapperForFooter{
+    height: 100%;
+    flex: 1 0 auto;
+  }
 </style>
