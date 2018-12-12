@@ -3,16 +3,25 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Footer from '@/components/Footer.vue'
-import Header from '@/components/Header.vue'
+
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+
+import Banners from '@/components/Banners.vue'
+import AddBanner from '@/components/AddBanner.vue'
+import EditBanner from '@/components/EditBanner.vue'
 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
 Vue.component('app-header', Header)
 Vue.component('app-footer', Footer)
+Vue.component('app-banners', Banners)
+Vue.component('app-addBanner', AddBanner)
+Vue.component('app-editBanner', EditBanner)
 
 new Vue({
   el: '#app',

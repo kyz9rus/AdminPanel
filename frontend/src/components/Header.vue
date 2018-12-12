@@ -19,7 +19,7 @@
     </div>
 </template>
 
-<style scoped>
+<style>
     .header{
         height: 100px;
         border: 1px solid black;
@@ -37,7 +37,7 @@
     .loginBlock button{
         background: black;
         width: 120px;
-        height: 40px;
+        height: 45px;
         border-radius: 8px;
         margin: 12px auto;
     }

@@ -1,8 +1,8 @@
 <template>
     <div v-if="this.banner">
-        <div class="descBanner" align="center">
+        <div class="descBanner" align="center" v-show="show">
             <h4>Banner {{ this.banner.id }}</h4>
-            <img v-on:click="hideWindow()" src="../assets/img/cross.png" alt="X"/>
+            <img @click="hideBanner" src="../assets/img/cross.png" alt="X"/>
             <div>
                 <label>Site: <a :href="this.banner.targeturl">{{this.banner.targeturl}}</a></label>  <br/>
                 <label>Language: </label> {{this.banner.langid}}
@@ -23,8 +23,12 @@
     export default {
         name: "banner",
         props: ["banner"],
+        data(){
+            return{
+                show: true
+            }
+        },
         methods: {
-
             // updateActive(status) {
             //     var data = {
             //         id:         this.banner.id,
@@ -58,8 +62,9 @@
                         console.log(e);
                     });
             },
-            hideWindow() {
-                $('.descBanner').hide();
+            hideBanner() {
+                this.show = !(this.show);
+                // $('.descBanner').hide();
             }
         }
     };

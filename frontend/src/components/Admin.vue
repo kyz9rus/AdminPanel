@@ -1,9 +1,35 @@
 <template>
     <div class="wrapperForFooter">
         <app-header :msg="greeting"></app-header>
-        <div class="content">
 
-            
+        <button class="menuButton" @click="show = !show">
+            <ion-icon class="ion-navicon" name="menu"></ion-icon>
+        </button>
+
+        <hr/>
+
+        <transition name="slide">
+            <aside v-show="show" >
+                <ul class="buttons">
+                    <li><input type="button" class="btn" value="Добавить баннер" @click="showOperation('app-addBanner')"/></li>
+                    <li><input type="button" class="btn" value="Редактировать баннер" @click="showOperation('app-editBanner')"/></li>
+                    <li><input type="button" class="btn" value="Удалить баннер" @click="showOperation('app-deleteBanner')"/></li>
+                    <li><input type="button" class="btn" value="Отсортировать баннеры по языку"/></li>
+                    <li><input type="button" class="btn" value="Посмотреть историю изменения баннеров" @click="showOperation('app-log')"/></li>
+                    <li><input type="button" class="btn" value="Открыть тестовую страницу для просмотра баннеров" /></li>
+
+                    <!--<li><a href="/admin/editBanner">Редактировать баннер</a></li>-->
+                    <!--<li><a href="/admin/deleteBanner">Удалить баннер</a></li>-->
+                    <!--<li><a href="/admin/sortBanners">Отсортировать баннеры по языку</a></li>-->
+                    <!--<li><a href="/admin/getHistory">Посмотреть историю изменения баннеров</a></li>-->
+                    <!--<li><a href="/">Открыть тестовую страницу для просмотра баннеров</a></li>-->
+                </ul>
+            </aside>
+        </transition>
+
+        <div class="content">
+            <app-addBanner></app-addBanner>
+            <app-editBanner></app-editBanner>
 
         </div>
         <app-footer></app-footer>
@@ -16,12 +42,19 @@
     export default {
         data(){
             return {
-                greeting: 'Welcome to the Admin Page!'
+                greeting: 'Welcome to the Admin Page!',
+                show: false
             }
         },
         name: "admin",
         props: ["admin"],
         methods: {
+            showOperation(operation){
+                switch (operation) {
+                    case "app-addBanner":    $('.addBanner').show(); $('.editBanner').hide(); break;
+                    case "app-editBanner":   $('.addBanner').hide(); $('.editBanner').show(); break;
+                }
+            },
             /* eslint-disable no-console */
             doSmth() {
                 // http
@@ -62,6 +95,58 @@
 
 </script>
 
-<style scoped>
+<style >
+    aside {
+        background-color: #fff;
+        width: 400px;
+        position: fixed;
+        top: 167px;
+        left: 0;
+        bottom: 0px;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
 
+    aside h2{
+        font-weight: 300;
+        color: #afafaf;
+    }
+
+    button {
+        background: transparent;
+        border: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+        outline: none;
+        color: #9f9f9f;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: all .3s ease-in-out;
+    }
+    button:active {
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .content{
+        height: 600px;
+    }
+    .buttons{
+        margin-top: -200px;
+        margin-left: -20px;
+
+    }
+    .buttons input{
+        font-size: 13px;
+        margin: 14px auto;
+    }
+    .menuButton{
+        margin-top: 10px;
+    }
+    .addBanner, .editBanner, .deleteBanner, .showLog{
+        display: none;
+    }
 </style>
