@@ -7,20 +7,13 @@
                 <label>Site: <a :href="this.banner.targeturl">{{this.banner.targeturl}}</a></label>  <br/>
                 <label>Language: </label> {{this.banner.langid}}
             </div>
-
-            <!--<span v-if="this.banner.active"-->
-                  <!--v-on:click="updateActive(false)"-->
-                  <!--class="button is-small btn-primary">Inactive</span>-->
-            <!--<span v-else-->
-                  <!--v-on:click="updateActive(true)"-->
-                  <!--class="button is-small btn-primary">Active</span>-->
-
-            <!--<span class="button is-small btn-danger" v-on:click="deleteBanner()">Delete</span>-->
         </div>
     </div>
     <div v-else>
-        <br/>
-        <p>Please click on a Banner...</p>
+        <!--<div class="descBanner" align="center" v-on:click="hideWindow">-->
+            <!--<br/>-->
+            <!--<p>Please click on a Banner...</p>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -31,28 +24,28 @@
         name: "banner",
         props: ["banner"],
         methods: {
-            /* eslint-disable no-console */
-            updateActive(status) {
-                var data = {
-                    id:         this.banner.id,
-                    imgsrc:     this.banner.imgsrc,
-                    width:      this.banner.width,
-                    height:     this.banner.height,
-                    targeturl:  this.banner.targeturl,
-                    langid:     this.banner.langid,
-                    active:     status
-                };
 
-                http
-                    .put("/banner/" + this.banner.id, data)
-                    .then(response => {
-                        this.banner.active = response.data.active;
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-            },
+            // updateActive(status) {
+            //     var data = {
+            //         id:         this.banner.id,
+            //         imgsrc:     this.banner.imgsrc,
+            //         width:      this.banner.width,
+            //         height:     this.banner.height,
+            //         targeturl:  this.banner.targeturl,
+            //         langid:     this.banner.langid,
+            //         active:     status
+            //     };
+            //
+            //     http
+            //         .put("/banner/" + this.banner.id, data)
+            //         .then(response => {
+            //             this.banner.active = response.data.active;
+            //             console.log(response.data);
+            //         })
+            //         .catch(e => {
+            //             console.log(e);
+            //         });
+            // },
             deleteBanner() {
                 http
                     .delete("/banner/" + this.banner.id)
@@ -68,7 +61,6 @@
             hideWindow() {
                 $('.descBanner').hide();
             }
-            /* eslint-enable no-console */
         }
     };
 </script>
@@ -76,10 +68,11 @@
 <style scoped>
     .descBanner{
         position: fixed;
-        left: 65%;
+        left: 40%;
         border: 1px solid black;
         border-radius: 18px;
         width: 300px;
+        background: rgba(255,255,255,0.8);
     }
 
     .descBanner h4{

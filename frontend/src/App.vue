@@ -1,31 +1,20 @@
 <template>
-  <div class="wrapper">
-    <div id="app" class="wrapperForFooter">
-      <app-header></app-header>
-      <div class="content">
+  <div id="app" class="wrapper">
 
-        <!--List of banners-->
-        <!--<app-listOfBanners></app-listOfBanners>-->
-        <nav>
-          <router-link class="btn btn-primary" to="/">Banners</router-link>
-          <!--<router-link class="btn btn-primary" to="/add">Add</router-link>-->
-          <router-link class="btn btn-primary" to="/search">Search</router-link>
-        </nav>
-
-        <br/>
-        <router-view/>
-
-      </div>
-
-      <app-footer></app-footer>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+    data() {
+        return {
+            greeting: 'Welcome to the Banner Page!'
+        }
+    },
+    name: 'App'
 }
+
 </script>
 
 <style>

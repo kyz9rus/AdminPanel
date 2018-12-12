@@ -3,7 +3,7 @@
         <div class="row" align="center">
 
             <div class="name col-md-10 col-sm-10 col-xs-10">
-                <p class="mainText">Welcome to the Banner Page!</p>
+                <p class="mainText">{{ msg }}</p>
             </div>
 
             <div class="loginBlock col-md-2 col-sm-2 col-xs-2">
@@ -50,3 +50,12 @@
         font-size: 23px;
     }
 </style>
+
+<script>
+    export default {
+        props: ['msg'],
+        data(){
+            return{}
+        }
+    }
+</script>

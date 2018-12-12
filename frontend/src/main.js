@@ -5,16 +5,28 @@ import App from './App'
 import router from './router'
 import Footer from '@/components/Footer.vue'
 import Header from '@/components/Header.vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
+Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
 Vue.component('app-header', Header)
 Vue.component('app-footer', Footer)
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 })
+
+// axios.get('http://localhost:8080/api/getAuthority').then((response) => {
+//     console.log('RESPONSE')
+//     console.log(response.data)
+//
+//     if (response.data === 'admin') {
+//         alert('admin');
+//         $(location).attr('href', 'http://localhost:8080/admin');
+//     }
+// });
