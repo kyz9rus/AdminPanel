@@ -16,7 +16,7 @@ import Banners from '@/components/Banners.vue'
 import AddBanner from '@/components/forAdmin/AddBanner.vue'
 import EditBanner from '@/components/forAdmin/EditBanner.vue'
 import DeleteBanner from '@/components/forAdmin/DeleteBanner.vue'
-import Log from '@/components/forAdmin/LogBanner.vue'
+import Log from '@/components/forAdmin/Log.vue'
 
 
 Vue.use(VueAxios, axios)

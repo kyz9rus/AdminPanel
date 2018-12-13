@@ -71,7 +71,6 @@
                     height: 0,
                     targeturl: null,
                     langid: null,
-                    active: false
                 },
                 submitted: false,
                 errors: [],
@@ -80,8 +79,6 @@
         },
         methods: {
             saveBanner() {
-                this.errors = [];
-
                 if (!this.banner.id)
                     this.errors.push('id is required');
                 if(!this.banner.imgsrc)

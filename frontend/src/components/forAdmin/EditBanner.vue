@@ -3,6 +3,13 @@
         <div class="submitform">
             <h1 class="nameOperation">Edit Banner</h1>
 
+            <div v-if="errors.length">
+                <label class="error">Please correct the following error(s):</label>
+                <ul>
+                    <li v-for="error in errors" class="error">{{ error }}</li>
+                </ul>
+            </div>
+
             <div v-if="!submitted">
                 <div class="form-group">
                     <label for="id">Id</label>
@@ -11,30 +18,35 @@
 
                 <div class="form-group">
                     <label for="imgsrc">ImgSrc</label>
-                    <input type="text" class="form-control" id="imgsrc" required v-model="banner.imgsrc" name="imgsrc">
+                    <input type="text" class="form-control" id="imgsrc" v-model="banner.imgsrc" name="imgsrc">
                 </div>
 
                 <div class="form-group">
                     <label for="width">Width</label>
-                    <input type="number" class="form-control" id="width" required v-model="banner.width" name="width">
+                    <input type="number" class="form-control" id="width" v-model="banner.width" name="width">
                 </div>
 
                 <div class="form-group">
                     <label for="height">Height</label>
-                    <input type="number" class="form-control" id="height" required v-model="banner.height" name="height">
+                    <input type="number" class="form-control" id="height" v-model="banner.height" name="height">
                 </div>
 
                 <div class="form-group">
                     <label for="targetUrl">TargetUrl</label>
-                    <input type="text" class="form-control" id="targetUrl" required v-model="banner.targetUrl" name="targetUrl">
+                    <input type="text" class="form-control" id="targetUrl" v-model="banner.targetUrl" name="targetUrl">
                 </div>
 
                 <div class="form-group">
                     <label for="langId">LangId</label>
-                    <input type="text" class="form-control" id="langId" required v-model="banner.langId" name="langId">
+                    <input type="text" class="form-control" id="langId" v-model="banner.langId" name="langId">
                 </div>
 
                 <button v-on:click="editBanner" class="btn btn-success">Submit</button>
+            </div>
+
+            <div v-else-if="successAdded">
+                <h4>Banner with id:{{banner.id}} has added successfully!</h4>
+                <button class="btn btn-success" v-on:click="newBanner">Add</button>
             </div>
 
             <div v-else>
@@ -46,59 +58,61 @@
 </template>
 
 <script>
+    import http from "../../http-common";
+
     export default {
         name: "EditBanner",
         data (){
             return{
                 banner: {
                     id: 0,
-                    imgsrc: "",
+                    imgsrc: '',
                     width: 0,
                     height: 0,
-                    targeturl: "",
-                    langid: "",
+                    targeturl: '',
+                    langid: '',
                 },
-                submitted: false
+                submitted: false,
+                errors: [],
+                successAdded: false
             }
         },
         methods: {
-            searchBanner(){
-                http
-                    .get("/admin/getBanner/" + this.banner.id)
-                    .then(response => {
-                        banner = response.data; // JSON are parsed automatically.
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
+            editBanner(){
+                if (!this.banner.id)
+                    this.errors.push('id is required');
 
-            },
-            editBanner() {
+                if (this.errors.length !== 0)
+                    e.preventDefault();
+
                 var data = {
-                    id:       this.banner.id,
-                    imgsrc:   this.banner.imgsrc,
-                    width:    this.banner.width,
-                    height:   this.banner.height,
-                    tarteUrl: this.banner.tarteUrl,
-                    langId:   this.banner.langId,
+                    id:        this.banner.id,
+                    imgsrc:    this.banner.imgsrc,
+                    width:     this.banner.width,
+                    height:    this.banner.height,
+                    targeturl: this.banner.targeturl,
+                    langid:    this.banner.langid,
                 };
 
                 http
-                    .get("/admin/editBanner", data)
+                    .put("/admin/editBanner", data)
                     .then(response => {
-                        this.banner.id = response.banner.id;
+                        if (response.status = 'OK'){
+                            this.banner.id = response.data.id;
+                            this.successAdded = true;
+                        }
                         console.log(response.data);
                     })
                     .catch(e => {
                         console.log(e);
                     });
 
-                this.submitted = true;
             },
             newBanner() {
                 this.submitted = false;
                 this.banner = {};
+                this.successAdded = false
+                this.errors = []
             }
 
         }
