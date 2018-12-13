@@ -50,18 +50,6 @@
             //             console.log(e);
             //         });
             // },
-            deleteBanner() {
-                http
-                    .delete("/banner/" + this.banner.id)
-                    .then(response => {
-                        console.log(response.data);
-                        this.$emit("refreshData");
-                        this.$router.push('/');
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-            },
             hideBanner() {
                 this.show = !(this.show);
                 // $('.descBanner').hide();

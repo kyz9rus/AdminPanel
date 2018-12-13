@@ -1,12 +1,12 @@
 <template>
-    <div class="editBanner">
-        Hello
+    <div class="log">
+        HelloLog
     </div>
 </template>
 
 <script>
     export default {
-        name: "EditBanner"
+        name: "Log"
     }
 </script>
 

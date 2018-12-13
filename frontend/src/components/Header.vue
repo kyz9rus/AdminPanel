@@ -9,7 +9,14 @@
             <div class="loginBlock col-md-2 col-sm-2 col-xs-2">
                 <form method="POST" action="/login">
                     <button type="submit" class="login">
-                        <img src="../assets/img/login.jpg" alt="Login"/>
+                        Login
+                        <!--<img src="../assets/img/login.jpg" alt="Login"/>-->
+                    </button>
+                </form>
+
+                <form :action="msg3">
+                    <button type="submit">
+                        {{ msg2 }}
                     </button>
                 </form>
 
@@ -35,15 +42,14 @@
     }
 
     .loginBlock button{
-        background: black;
+        /*background: black;*/
+        background: linear-gradient(180deg, grey, black);
         width: 120px;
         height: 45px;
         border-radius: 8px;
-        margin: 12px auto;
-    }
-
-    .loginBlock p{
-        font-size: 20px;
+        margin-top: 2px;
+        font-size: 14px;
+        color: white;
     }
 
     .mainText{
@@ -53,7 +59,7 @@
 
 <script>
     export default {
-        props: ['msg'],
+        props: ['msg', 'msg2', 'msg3'],
         data(){
             return{}
         }

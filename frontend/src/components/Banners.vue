@@ -33,8 +33,9 @@
         name: "banners-list",
         data() {
             return {
-                banners: [{id: 1, width: 400, height: 200, imgsrc: '/static/img/acura.jpg', langid: 'Russion', targeturl: 'http://www.yandex.ru'}],
-                show: true
+                banners: [{id: 1, width: 400, height: 200, imgsrc: '/static/img/acura.jpg', langid: 'Russion', targeturl: 'https://www.lada.ru'}],
+                show: true,
+                scale: 2       // масштаб для корректного отображения баннеров на сайте
             };
         },
         methods: {
@@ -44,6 +45,10 @@
                     .then(response => {
                         this.banners = response.data; // JSON are parsed automatically.
                         console.log(response.data);
+                        for (var i = 0; i < this.banners.length; i++){
+                            this.banners[i].width = this.banners[i].width / this.scale;
+                            this.banners[i].height = this.banners[i].height / this.scale;
+                        }
                     })
                     .catch(e => {
                         console.log(e);

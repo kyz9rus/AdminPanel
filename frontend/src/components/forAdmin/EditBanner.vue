@@ -1,7 +1,7 @@
 <template>
-    <div class="addBanner">
+    <div class="editBanner">
         <div class="submitform">
-            <h1 class="nameOperation">Add Banner</h1>
+            <h1 class="nameOperation">Edit Banner</h1>
 
             <div v-if="!submitted">
                 <div class="form-group">
@@ -31,10 +31,10 @@
 
                 <div class="form-group">
                     <label for="langId">LangId</label>
-                    <input type="number" class="form-control" id="langId" required v-model="banner.langId" name="langId">
+                    <input type="text" class="form-control" id="langId" required v-model="banner.langId" name="langId">
                 </div>
 
-                <button v-on:click="saveBanner" class="btn btn-success">Submit</button>
+                <button v-on:click="editBanner" class="btn btn-success">Submit</button>
             </div>
 
             <div v-else>
@@ -46,27 +46,35 @@
 </template>
 
 <script>
-    import http from "../http-common";
-
     export default {
-        name: "add-banner",
-        data() {
-            return {
+        name: "EditBanner",
+        data (){
+            return{
                 banner: {
                     id: 0,
                     imgsrc: "",
                     width: 0,
                     height: 0,
-                    targetUrl: "",
-                    langId: 0,
-                    active: false
+                    targeturl: "",
+                    langid: "",
                 },
                 submitted: false
-            };
+            }
         },
         methods: {
+            searchBanner(){
+                http
+                    .get("/admin/getBanner/" + this.banner.id)
+                    .then(response => {
+                        banner = response.data; // JSON are parsed automatically.
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
 
-            saveBanner() {
+            },
+            editBanner() {
                 var data = {
                     id:       this.banner.id,
                     imgsrc:   this.banner.imgsrc,
@@ -77,7 +85,7 @@
                 };
 
                 http
-                    .post("/api/admin/addBanner", data)
+                    .get("/admin/editBanner", data)
                     .then(response => {
                         this.banner.id = response.banner.id;
                         console.log(response.data);
@@ -94,16 +102,9 @@
             }
 
         }
-    };
+    }
 </script>
 
 <style scoped>
-    .nameOperation{
-        font-size: 20px;
-    }
-    .submitform {
-        margin-left: 40%;
-        max-width: 500px;
-        /*margin: auto;*/
-    }
+
 </style>

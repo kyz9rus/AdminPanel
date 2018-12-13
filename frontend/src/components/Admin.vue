@@ -1,6 +1,6 @@
 <template>
     <div class="wrapperForFooter">
-        <app-header :msg="greeting"></app-header>
+        <app-header :msg="greeting" :msg2="backPage" :msg3="pathTo"></app-header>
 
         <button class="menuButton" @click="show = !show">
             <ion-icon class="ion-navicon" name="menu"></ion-icon>
@@ -17,12 +17,6 @@
                     <li><input type="button" class="btn" value="Отсортировать баннеры по языку"/></li>
                     <li><input type="button" class="btn" value="Посмотреть историю изменения баннеров" @click="showOperation('app-log')"/></li>
                     <li><input type="button" class="btn" value="Открыть тестовую страницу для просмотра баннеров" /></li>
-
-                    <!--<li><a href="/admin/editBanner">Редактировать баннер</a></li>-->
-                    <!--<li><a href="/admin/deleteBanner">Удалить баннер</a></li>-->
-                    <!--<li><a href="/admin/sortBanners">Отсортировать баннеры по языку</a></li>-->
-                    <!--<li><a href="/admin/getHistory">Посмотреть историю изменения баннеров</a></li>-->
-                    <!--<li><a href="/">Открыть тестовую страницу для просмотра баннеров</a></li>-->
                 </ul>
             </aside>
         </transition>
@@ -30,6 +24,9 @@
         <div class="content">
             <app-addBanner></app-addBanner>
             <app-editBanner></app-editBanner>
+            <!--<app-deleteBanner></app-deleteBanner>-->
+            <!--<app-log></app-log>-->
+
 
         </div>
         <app-footer></app-footer>
@@ -43,6 +40,8 @@
         data(){
             return {
                 greeting: 'Welcome to the Admin Page!',
+                backPage: 'Main page',
+                pathTo:   '/',
                 show: false
             }
         },
@@ -51,8 +50,10 @@
         methods: {
             showOperation(operation){
                 switch (operation) {
-                    case "app-addBanner":    $('.addBanner').show(); $('.editBanner').hide(); break;
-                    case "app-editBanner":   $('.addBanner').hide(); $('.editBanner').show(); break;
+                    case "app-addBanner":    $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); break;
+                    case "app-editBanner":   $('.addBanner').hide(); $('.editBanner').show(); $('.deleteBanner').hide(); $('.log').hide(); break;
+                    case "app-deleteBanner":     $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').show(); $('.log').hide(); break;
+                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); break;
                 }
             },
             /* eslint-disable no-console */
@@ -95,14 +96,16 @@
 
 </script>
 
-<style >
+<style scoped>
     aside {
         background-color: #fff;
         width: 400px;
         position: fixed;
         top: 167px;
+        margin-top: -4px;
+        height: 600px;
         left: 0;
-        bottom: 0px;
+        bottom: 0;
         z-index: 1;
         display: flex;
         justify-content: center;
@@ -113,6 +116,7 @@
     aside h2{
         font-weight: 300;
         color: #afafaf;
+        transition: 1s;
     }
 
     button {
@@ -132,7 +136,7 @@
     }
 
     .content{
-        height: 600px;
+        height: 800px;
     }
     .buttons{
         margin-top: -200px;
@@ -146,7 +150,10 @@
     .menuButton{
         margin-top: 10px;
     }
-    .addBanner, .editBanner, .deleteBanner, .showLog{
+    .addBanner, .editBanner, .deleteBanner, .log{
         display: none;
+    }
+    li{
+        list-style-type: none;
     }
 </style>
