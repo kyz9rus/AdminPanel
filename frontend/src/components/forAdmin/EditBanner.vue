@@ -2,6 +2,7 @@
     <div class="editBanner">
         <div class="submitform">
             <h1 class="nameOperation">Edit Banner</h1>
+            <h6>Choose only those fields, which you wanted to change (id is required)</h6>
 
             <div v-if="errors.length">
                 <label class="error">Please correct the following error(s):</label>
@@ -32,25 +33,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="targetUrl">TargetUrl</label>
-                    <input type="text" class="form-control" id="targetUrl" v-model="banner.targetUrl" name="targetUrl">
+                    <label for="targeturl">TargetUrl</label>
+                    <input type="text" class="form-control" id="targeturl" v-model="banner.targeturl" name="targeturl">
                 </div>
 
                 <div class="form-group">
-                    <label for="langId">LangId</label>
-                    <input type="text" class="form-control" id="langId" v-model="banner.langId" name="langId">
+                    <label for="langid">LangId</label>
+                    <input type="text" class="form-control" id="langid" v-model="banner.langid" name="langid">
                 </div>
 
                 <button v-on:click="editBanner" class="btn btn-success">Submit</button>
             </div>
 
-            <div v-else-if="successAdded">
-                <h4>Banner with id:{{banner.id}} has added successfully!</h4>
+            <div v-else-if="success">
+                <h4>Banner with id:{{banner.id}} has changed successfully!</h4>
                 <button class="btn btn-success" v-on:click="newBanner">Add</button>
             </div>
 
             <div v-else>
-                <h4>You submitted successfully!</h4>
+                <h4>Something wrong :( Show the console log</h4>
                 <button class="btn btn-success" v-on:click="newBanner">Add</button>
             </div>
         </div>
@@ -74,7 +75,7 @@
                 },
                 submitted: false,
                 errors: [],
-                successAdded: false
+                success: false
             }
         },
         methods: {
@@ -99,20 +100,20 @@
                     .then(response => {
                         if (response.status = 'OK'){
                             this.banner.id = response.data.id;
-                            this.successAdded = true;
+                            this.success = true;
                         }
-                        console.log(response.data);
                     })
                     .catch(e => {
                         console.log(e);
                     });
 
+                this.submitted = true;
             },
             newBanner() {
                 this.submitted = false;
+                this.success = false;
                 this.banner = {};
-                this.successAdded = false
-                this.errors = []
+                this.errors = [];
             }
 
         }

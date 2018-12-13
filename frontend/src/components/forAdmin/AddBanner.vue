@@ -44,7 +44,7 @@
                 <button v-on:click="saveBanner" class="btn btn-success">Submit</button>
             </div>
 
-            <div v-else-if="successAdded">
+            <div v-else-if="success">
                 <h4>Banner with id:{{banner.id}} has added successfully!</h4>
                 <button class="btn btn-success" v-on:click="newBanner">Add</button>
             </div>
@@ -74,7 +74,7 @@
                 },
                 submitted: false,
                 errors: [],
-                successAdded: false
+                success: false
             };
         },
         methods: {
@@ -109,7 +109,7 @@
                     .then(response => {
                         if (response.status = 'OK'){
                             this.banner.id = response.data.id;
-                            this.successAdded = true;
+                            this.success = true;
                         }
                     })
                     .catch(e => {
@@ -120,7 +120,9 @@
             },
             newBanner() {
                 this.submitted = false;
+                this.success = false;
                 this.banner = {};
+                this.errors = [];
             }
 
         }
