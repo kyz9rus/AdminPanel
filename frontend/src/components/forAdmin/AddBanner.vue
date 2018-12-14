@@ -2,7 +2,7 @@
     <div class="addBanner">
         <div class="submitform">
             <h1 class="nameOperation">Add Banner</h1>
-
+            {{adminName}}
             <div v-if="errors.length">
                 <label class="error">Please correct the following error(s):</label>
                 <ul>
@@ -51,7 +51,7 @@
 
             <div v-else>
                 <h4>Something wrong :( Show the console log</h4>
-                <button class="btn btn-danger">Add</button>
+                <button v-on:click="newBanner" class="btn btn-danger">Add</button>
             </div>
         </div>
     </div>
@@ -62,6 +62,7 @@
 
     export default {
         name: "add-banner",
+        props: ['adminName'],
         data() {
             return {
                 banner: {
@@ -79,6 +80,7 @@
         },
         methods: {
             saveBanner() {
+
                 if (!this.banner.id)
                     this.errors.push('id is required');
                 if(!this.banner.imgsrc)
@@ -105,10 +107,11 @@
                 };
 
                 http
-                    .post("/admin/saveBanner", data)
+                    .post("/admin/saveBanner/" + this.adminName, data)
                     .then(response => {
+                        console.log(response.data);
                         if (response.status = 'OK'){
-                            this.banner.id = response.data.id;
+                            this.banner.id = response.data;
                             this.success = true;
                         }
                     })
@@ -120,9 +123,11 @@
             },
             newBanner() {
                 this.submitted = false;
-                this.success = false;
-                this.banner = {};
-                this.errors = [];
+                if (this.success = true){
+                    this.success = false;
+                    this.banner = {};
+                    this.errors = [];
+                }
             }
 
         }
@@ -134,7 +139,8 @@
         font-size: 20px;
     }
     .submitform {
-        margin-left: 40%;
+        width: 500px;
+        margin-left: calc((100% - 500px)/2);
         max-width: 500px;
     }
     .error{

@@ -16,15 +16,15 @@
                     <li><input type="button" class="btn" value="Удалить баннер" @click="showOperation('app-deleteBanner')"/></li>
                     <li><input type="button" class="btn" value="Отсортировать баннеры по языку"/></li>
                     <li><input type="button" class="btn" value="Посмотреть историю изменения баннеров" @click="showOperation('app-log')"/></li>
-                    <li><input type="button" class="btn" value="Открыть тестовую страницу для просмотра баннеров" /></li>
+                    <li><input type="button" class="btn" value="Открыть тестовую страницу для просмотра баннеров" @click="goToIndex"/></li>
                 </ul>
             </aside>
         </transition>
 
         <div class="content">
-            <app-addBanner></app-addBanner>
-            <app-editBanner></app-editBanner>
-            <app-deleteBanner></app-deleteBanner>
+            <app-addBanner :adminName="adminName"></app-addBanner>
+            <app-editBanner :adminName="adminName"></app-editBanner>
+            <app-deleteBanner :adminName="adminName"></app-deleteBanner>
             <!--<app-log @isClicked="show = $event"></app-log>-->
             <app-log></app-log>
 
@@ -35,62 +35,39 @@
 </template>
 
 <script>
+    import http from "../http-common";
+
     export default {
         data(){
             return {
                 greeting: 'Welcome to the Admin Page!',
                 backPage: 'Main page',
                 pathTo:   '/',
+                adminName: '',
                 show: false
             }
         },
         name: "admin",
-        props: ["admin"],
         methods: {
             showOperation(operation){
+                this.show = false;
+                http
+                    .get('admin/getAdminName')
+                    .then((response) => {
+                       this.adminName = response.data
+                    });
+
                 switch (operation) {
                     case "app-addBanner":        $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); break;
                     case "app-editBanner":       $('.addBanner').hide(); $('.editBanner').show(); $('.deleteBanner').hide(); $('.log').hide(); break;
                     case "app-deleteBanner":     $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').show(); $('.log').hide(); break;
-                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); this.show = false; break;
+                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); break;
                 }
             },
-            /* eslint-disable no-console */
-            doSmth() {
-                // http
-                //     .put("/banner/" + this.banner.id, data)
-                //     .then(response => {
-                //         this.banner.active = response.data.active;
-                //         console.log(response.data);
-                //     })
-                //     .catch(e => {
-                //         console.log(e);
-                //     });
-            }
-        },
-    //         updateActive(status) {
-    //             var data = {
-    //                 id:         this.banner.id,
-    //                 imgsrc:     this.banner.imgsrc,
-    //                 width:      this.banner.width,
-    //                 height:     this.banner.height,
-    //                 targeturl:  this.banner.targeturl,
-    //                 langid:     this.banner.langid,
-    //                 active:     status
-    //             };
-    //
-    //             http
-    //                 .put("/banner/" + this.banner.id, data)
-    //                 .then(response => {
-    //                     this.banner.active = response.data.active;
-    //                     console.log(response.data);
-    //                 })
-    //                 .catch(e => {
-    //                     console.log(e);
-    //                 });
-    //         },
-    //
-    //     }
+            goToIndex(){
+                $(location).attr('href', '/');
+            },
+        }
     };
 
 </script>
@@ -111,13 +88,11 @@
         align-items: center;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
-
     aside h2{
         font-weight: 300;
         color: #afafaf;
         transition: 1s;
     }
-
     button {
         background: transparent;
         border: 0;

@@ -2,10 +2,8 @@
     <div class="wrapperForFooter">
         <app-header :msg="greeting" :msg2="backPage" :msg3="pathTo"></app-header>
 
-
             <div class="content">
                 <app-banners></app-banners>
-
 
                 <br/>
 

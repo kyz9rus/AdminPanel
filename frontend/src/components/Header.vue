@@ -8,10 +8,7 @@
 
             <div class="loginBlock col-md-2 col-sm-2 col-xs-2">
                 <form method="POST" action="/login">
-                    <button type="submit" class="login">
-                        Login
-                        <!--<img src="../assets/img/login.jpg" alt="Login"/>-->
-                    </button>
+                    <button type="submit" class="login">Login</button>
                 </form>
 
                 <form :action="msg3">

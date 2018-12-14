@@ -63,6 +63,7 @@
 
     export default {
         name: "EditBanner",
+        props: ["adminName"],
         data (){
             return{
                 banner: {
@@ -95,10 +96,10 @@
                 };
 
                 http
-                    .put("/admin/editBanner", data)
+                    .put("/admin/editBanner/" + this.adminName, data)
                     .then(response => {
                         if (response.status = 'OK'){
-                            this.banner.id = response.data.id;
+                            this.banner.id = response.data;
                             this.success = true;
                         }
                     })
@@ -118,7 +119,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

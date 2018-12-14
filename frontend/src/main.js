@@ -43,13 +43,3 @@ new Vue({
     components: { AppAdmin },
     template: '<AppAdmin/>',
 })
-
-// axios.get('http://localhost:8080/api/getAuthority').then((response) => {
-//     console.log('RESPONSE')
-//     console.log(response.data)
-//
-//     if (response.data === 'admin') {
-//         alert('admin');
-//         $(location).attr('href', 'http://localhost:8080/admin');
-//     }
-// });

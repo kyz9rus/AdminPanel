@@ -24,7 +24,7 @@
 
             <div v-else>
                 <h4>Something wrong :( Show the console log</h4>
-                <button class="btn btn-danger">Delete</button>
+                <button v-on:click="newBanner" class="btn btn-danger">Delete</button>
             </div>
         </div>
     </div>
@@ -35,6 +35,7 @@
 
     export default {
         name: "DeleteBanner",
+        props: ["adminName"],
         data(){
             return{
                 banner: {
@@ -67,7 +68,7 @@
                 };
 
                 http
-                    .delete("/admin/deleteBanner/" + data.id)
+                    .delete("/admin/deleteBanner/" + data.id + "/" + this.adminName)
                     .then(response => {
                         if (response.data === true)
                             this.success = true;
@@ -85,7 +86,3 @@
         }
     };
 </script>
-
-<style scoped>
-
-</style>
