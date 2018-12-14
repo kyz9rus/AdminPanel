@@ -24,8 +24,9 @@
         <div class="content">
             <app-addBanner></app-addBanner>
             <app-editBanner></app-editBanner>
-            <!--<app-deleteBanner></app-deleteBanner>-->
-            <!--<app-log></app-log>-->
+            <app-deleteBanner></app-deleteBanner>
+            <!--<app-log @isClicked="show = $event"></app-log>-->
+            <app-log></app-log>
 
 
         </div>
@@ -34,8 +35,6 @@
 </template>
 
 <script>
-    import http from "../http-common";
-
     export default {
         data(){
             return {
@@ -50,10 +49,10 @@
         methods: {
             showOperation(operation){
                 switch (operation) {
-                    case "app-addBanner":    $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); break;
-                    case "app-editBanner":   $('.addBanner').hide(); $('.editBanner').show(); $('.deleteBanner').hide(); $('.log').hide(); break;
+                    case "app-addBanner":        $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); break;
+                    case "app-editBanner":       $('.addBanner').hide(); $('.editBanner').show(); $('.deleteBanner').hide(); $('.log').hide(); break;
                     case "app-deleteBanner":     $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').show(); $('.log').hide(); break;
-                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); break;
+                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); this.show = false; break;
                 }
             },
             /* eslint-disable no-console */

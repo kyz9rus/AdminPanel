@@ -51,7 +51,7 @@
 
             <div v-else>
                 <h4>Something wrong :( Show the console log</h4>
-                <button class="btn btn-success" v-on:click="newBanner">Add</button>
+                <button class="btn btn-danger">Add</button>
             </div>
         </div>
     </div>

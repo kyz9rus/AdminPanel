@@ -1,66 +1,82 @@
 <template>
     <div class="deleteBanner">
-        <div v-if="!submitted">
-            <div class="form-group">
-                <label for="id">Id</label>
-                <input type="number" class="form-control" id="id" required v-model="banner.id" name="id">
+        <div class="submitform">
+            <h1 class="nameOperation">Delete Banner</h1>
+
+            <div v-if="error">
+                <label class="error">Please correct the following error(s):</label>
+                <p  class="error">{{ error }}</p>
             </div>
 
-            <div class="form-group">
-                <label for="imgsrc">ImgSrc</label>
-                <input type="text" class="form-control" id="imgsrc" required v-model="banner.imgsrc" name="imgsrc">
+            <div v-if="!submitted">
+                <div class="form-group">
+                    <label for="id">Enter banner id</label>
+                    <input type="number" class="form-control" id="id" required v-model="banner.id" name="id">
+                </div>
+
+                <button v-on:click="deleteBanner" class="btn btn-success">Submit</button>
             </div>
 
-            <div class="form-group">
-                <label for="width">Width</label>
-                <input type="number" class="form-control" id="width" required v-model="banner.width" name="width">
+            <div v-else-if="success">
+                <h4>Banner with id:{{banner.id}} has deleted successfully!</h4>
+                <button class="btn btn-success" v-on:click="newBanner">Delete</button>
             </div>
 
-            <div class="form-group">
-                <label for="height">Height</label>
-                <input type="number" class="form-control" id="height" required v-model="banner.height" name="height">
+            <div v-else>
+                <h4>Something wrong :( Show the console log</h4>
+                <button class="btn btn-danger">Delete</button>
             </div>
-
-            <div class="form-group">
-                <label for="targetUrl">TargetUrl</label>
-                <input type="text" class="form-control" id="targetUrl" required v-model="banner.targetUrl" name="targetUrl">
-            </div>
-
-            <div class="form-group">
-                <label for="langId">LangId</label>
-                <input type="text" class="form-control" id="langId" required v-model="banner.langId" name="langId">
-            </div>
-
-            <button v-on:click="saveBanner" class="btn btn-success">Submit</button>
-        </div>
-
-        <div v-else>
-            <h4>You submitted successfully!</h4>
-            <button class="btn btn-success" v-on:click="newBanner">Add</button>
         </div>
     </div>
 </template>
 
 <script>
+    import http from "../../http-common";
+
     export default {
         name: "DeleteBanner",
         data(){
             return{
-                submitted: false
+                banner: {
+                    id: 0,
+                    imgsrc: null,
+                    width: 0,
+                    height: 0,
+                    targeturl: null,
+                    langid: null,
+                },
+                submitted: false,
+                error: '',
+                success: false
             }
         },
         methods: {
-            deleteBanner() {
+            deleteBanner(){
+                if (!this.banner.id) {
+                    this.error = 'id is required';
+                    e.preventDefault();
+                }
+
+                var data = {
+                    id:        this.banner.id,
+                    imgsrc:    this.banner.imgsrc,
+                    width:     this.banner.width,
+                    height:    this.banner.height,
+                    targeturl: this.banner.targeturl,
+                    langid:    this.banner.langid,
+                };
+
                 http
-                    .delete("/admin/deleteBanner/" + this.banner.id)
+                    .delete("/admin/deleteBanner/" + data.id)
                     .then(response => {
-                        console.log(response.data);
-                        this.$emit("refreshData");
-                        this.$router.push('/');
+                        if (response.data === true)
+                            this.success = true;
                     })
                     .catch(e => {
                         console.log(e);
                     });
+
+                this.submitted = true;
             },
             newBanner() {
                 this.submitted = false;

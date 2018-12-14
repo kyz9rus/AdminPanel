@@ -2,7 +2,6 @@
     <div class="editBanner">
         <div class="submitform">
             <h1 class="nameOperation">Edit Banner</h1>
-            <h6>Choose only those fields, which you wanted to change (id is required)</h6>
 
             <div v-if="errors.length">
                 <label class="error">Please correct the following error(s):</label>
@@ -12,6 +11,7 @@
             </div>
 
             <div v-if="!submitted">
+                <h6>Choose only those fields, which you wanted to change (id is required)</h6>
                 <div class="form-group">
                     <label for="id">Id</label>
                     <input type="number" class="form-control" id="id" required v-model="banner.id" name="id">
@@ -47,12 +47,12 @@
 
             <div v-else-if="success">
                 <h4>Banner with id:{{banner.id}} has changed successfully!</h4>
-                <button class="btn btn-success" v-on:click="newBanner">Add</button>
+                <button class="btn btn-success" v-on:click="newBanner">Edit</button>
             </div>
 
             <div v-else>
                 <h4>Something wrong :( Show the console log</h4>
-                <button class="btn btn-success" v-on:click="newBanner">Add</button>
+                <button class="btn btn-danger">Edit</button>
             </div>
         </div>
     </div>
@@ -80,11 +80,10 @@
         },
         methods: {
             editBanner(){
-                if (!this.banner.id)
+                if (!this.banner.id) {
                     this.errors.push('id is required');
-
-                if (this.errors.length !== 0)
                     e.preventDefault();
+                }
 
                 var data = {
                     id:        this.banner.id,
