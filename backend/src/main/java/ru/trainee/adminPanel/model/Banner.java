@@ -1,32 +1,53 @@
 package ru.trainee.adminPanel.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Integer.class)
 public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "banner_id")
     private int id;
-    private String imgSrc;
+    @NotNull
+    private String imgsrc;
+    @NotNull
     private int width;
+    @NotNull
     private int height;
-    private String targetUrl;
-    private int langId;
+    @NotNull
+    private String targeturl;
+    @NotNull
+    private String langid;
+
+//    @JsonBackReference
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "banner")
+//    private List<Action> actions;
 
     public Banner(){}
 
-    public Banner(int id, String imgSrc, int width, int height, String targetUrl, int langId){
+    public Banner(int id){
         this.id = id;
-        this.imgSrc = imgSrc;
+    }
+
+    public Banner(int id, String imgsrc, int width, int height, String targeturl, String langid) {
+        this.id = id;
+        this.imgsrc = imgsrc;
         this.width = width;
         this.height = height;
-        this.targetUrl = targetUrl;
-        this.langId = langId;
+        this.targeturl = targeturl;
+        this.langid = langid;
+    }
+
+    @Override
+    public String toString(){
+        return "Banner {id:" + id + ", imgSrc:" + imgsrc + ", width:" + width + ", height:" + height + ", targetUrl:" + targeturl + ", langId:" + langid + "}";
     }
 }

@@ -12,14 +12,14 @@ import ru.trainee.adminPanel.repository.UserRepository;
 import java.util.Optional;
 
 @Service
-public class CustomAdminDetailService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByName(username);
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findById(login);
 
         user.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
         return user.

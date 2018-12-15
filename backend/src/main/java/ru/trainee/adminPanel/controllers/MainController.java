@@ -1,18 +1,22 @@
 package ru.trainee.adminPanel.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.trainee.adminPanel.model.Admin;
+import org.springframework.web.bind.annotation.RestController;
+import ru.trainee.adminPanel.model.Banner;
+import ru.trainee.adminPanel.service.BannerService;
 
-@Controller
+import java.util.List;
+
+@RequestMapping("/api")
+@RestController
 public class MainController {
+    @Autowired
+    BannerService bannerService;
 
-    @RequestMapping("/")
-    public String hello(Model model){
-        Admin admin = new Admin("admin1", "qwerty123");
-        model.addAttribute(admin);
-
-        return "index";
+    @GetMapping("/showAllBanners")
+    public List<Banner> showAllBanners(){
+        return bannerService.showAllBanners();
     }
 }

@@ -1,9 +1,8 @@
-package ru.trainee.model;
+package ru.trainee.adminPanel.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.trainee.adminPanel.model.User;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

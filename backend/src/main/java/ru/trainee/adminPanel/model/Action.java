@@ -1,31 +1,56 @@
 package ru.trainee.adminPanel.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Integer.class)
 public class Action {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int id_banner;
-    private String name_admin;
-    private String name_action;
-    private String time_action;
+
+//    @JsonBackReference
+//    public Banner getBanner(){
+//        return banner;
+//    }
+
+//    @JsonBackReference
+//    public User getUser(){
+//        return user;
+//    }
+
+    @NotNull
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+//    @JoinColumn(name="banner_id")
+    private int banner_id;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="username")
+    private User user;
+
+    @NotNull
+    private String actionname;
+    @NotNull
+    private String actiontime;
 
     public Action(){}
 
-    public Action(int id, int id_banner, String name_admin, String name_action, String time_action){
-        this.id = id;
-        this.id_banner = id_banner;
-        this.name_admin = name_admin;
-        this.name_action = name_action;
-        this.time_action = time_action;
+    public Action(int banner_id, User user, String actionName, String actiontime){
+        this.banner_id = banner_id;
+        this.user = user;
+        this.actionname = actionName;
+        this.actiontime = actiontime;
+    }
+
+    @Override
+    public String toString(){
+        return "Action {id:" + id + ", banner_id:" + banner_id + ", userName:" + user.getLogin() + ", actionName:" + actionname + ", actionTime:" + actiontime + "}";
     }
 
 }
