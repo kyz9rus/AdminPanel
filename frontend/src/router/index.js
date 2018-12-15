@@ -16,7 +16,7 @@ export default new Router({
           children: [
               {
                   path: "/banner/:id",
-                  name: "banner-details",
+                  name: "banner-details-index",
                   component: Banner,
                   props: true
               }
@@ -25,17 +25,15 @@ export default new Router({
       {
           path: "/admin",
           name: "admin",
-          component: Admin
+          component: Admin,
+          children: [
+              {
+                  path: "/admin/banner/:id",
+                  name: "banner-details-admin",
+                  component: Banner,
+                  props: true
+              }
+          ]
       }
-    // {
-    //     path: "/addBanner",
-    //     name: "add",
-    //     component: AddBanner
-    // },
-    // {
-    //   path: "/search",
-    //   name: "search",
-    //   component: SearchBanners
-    // },
   ]
 })

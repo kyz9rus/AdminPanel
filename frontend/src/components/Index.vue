@@ -1,9 +1,9 @@
 <template>
     <div class="wrapperForFooter">
-        <app-header :msg="greeting" :msg2="backPage" :msg3="pathTo"></app-header>
+        <app-header :msg="greeting" :msg2="backPage" :msg3="pathToAdmin"></app-header>
 
             <div class="content">
-                <app-banners></app-banners>
+                <app-banners :bannerDetailsName="pathToBannerDetails"></app-banners>
 
                 <br/>
 
@@ -20,14 +20,11 @@ export default {
             return {
                 greeting: 'Welcome to the Banner Page!',
                 backPage: 'Admin page',
-                pathTo:   '/admin',
-                authority: ''
+                pathToAdmin:   '/admin',
+                authority: '',
+                pathToBannerDetails: 'banner-details-index'
             };
         },
         methods: {}
     };
 </script>
-
-<style scoped>
-
-</style>

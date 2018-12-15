@@ -12,7 +12,6 @@
 </template>
 
 <script>
-    import http from "../http-common";
 
     export default {
         name: "banner",
@@ -23,30 +22,8 @@
             }
         },
         methods: {
-            // updateActive(status) {
-            //     var data = {
-            //         id:         this.banner.id,
-            //         imgsrc:     this.banner.imgsrc,
-            //         width:      this.banner.width,
-            //         height:     this.banner.height,
-            //         targeturl:  this.banner.targeturl,
-            //         langid:     this.banner.langid,
-            //         active:     status
-            //     };
-            //
-            //     http
-            //         .put("/banner/" + this.banner.id, data)
-            //         .then(response => {
-            //             this.banner.active = response.data.active;
-            //             console.log(response.data);
-            //         })
-            //         .catch(e => {
-            //             console.log(e);
-            //         });
-            // },
             hideBanner() {
                 this.show = !(this.show);
-                // $('.descBanner').hide();
             }
         }
     };

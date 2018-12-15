@@ -14,9 +14,8 @@
                     <li><input type="button" class="btn" value="Добавить баннер" @click="showOperation('app-addBanner')"/></li>
                     <li><input type="button" class="btn" value="Редактировать баннер" @click="showOperation('app-editBanner')"/></li>
                     <li><input type="button" class="btn" value="Удалить баннер" @click="showOperation('app-deleteBanner')"/></li>
-                    <li><input type="button" class="btn" value="Отсортировать баннеры по языку"/></li>
                     <li><input type="button" class="btn" value="Посмотреть историю изменения баннеров" @click="showOperation('app-log')"/></li>
-                    <li><input type="button" class="btn" value="Открыть тестовую страницу для просмотра баннеров" @click="goToIndex"/></li>
+                    <li><input type="button" class="btn" value="Открыть тестовую страницу для просмотра баннеров" @click="showOperation('app-banners')"/></li>
                 </ul>
             </aside>
         </transition>
@@ -26,6 +25,7 @@
             <app-editBanner :adminName="adminName"></app-editBanner>
             <app-deleteBanner :adminName="adminName"></app-deleteBanner>
             <!--<app-log @isClicked="show = $event"></app-log>-->
+            <app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails"></app-banners>
             <app-log></app-log>
 
 
@@ -43,7 +43,8 @@
                 greeting: 'Welcome to the Admin Page!',
                 backPage: 'Main page',
                 pathTo:   '/',
-                adminName: '',
+                adminName: '1',
+                pathToBannerDetails: 'banner-details-admin',
                 show: false
             }
         },
@@ -58,15 +59,13 @@
                     });
 
                 switch (operation) {
-                    case "app-addBanner":        $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); break;
-                    case "app-editBanner":       $('.addBanner').hide(); $('.editBanner').show(); $('.deleteBanner').hide(); $('.log').hide(); break;
-                    case "app-deleteBanner":     $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').show(); $('.log').hide(); break;
-                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); break;
+                    case "app-addBanner":        $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); $('.testPage').hide(); break;
+                    case "app-editBanner":       $('.addBanner').hide(); $('.editBanner').show(); $('.deleteBanner').hide(); $('.log').hide(); $('.testPage').hide(); break;
+                    case "app-deleteBanner":     $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').show(); $('.log').hide(); $('.testPage').hide(); break;
+                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); $('.testPage').hide(); break;
+                    case "app-banners":          $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); $('.testPage').show(); break;
                 }
-            },
-            goToIndex(){
-                $(location).attr('href', '/');
-            },
+            }
         }
     };
 
@@ -110,7 +109,7 @@
     }
 
     .content{
-        height: 800px;
+        min-height: 700px;
     }
     .buttons{
         margin-top: -200px;
