@@ -1,6 +1,8 @@
 package ru.trainee.adminPanel.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +13,7 @@ import java.util.List;
 
 @RequestMapping("/api")
 @RestController
-public class MainController {
+public class PublicController {
     @Autowired
     BannerService bannerService;
 
@@ -19,4 +21,12 @@ public class MainController {
     public List<Banner> showAllBanners(){
         return bannerService.showAllBanners();
     }
+
+    @GetMapping("/getAuthority")
+    public Object getAuthority(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication.getPrincipal();
+    }
+
 }

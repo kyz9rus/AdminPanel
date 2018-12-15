@@ -1,4 +1,4 @@
-# frontend part
+# Welcome to the AdminPanel project
 
 ## Build Setup
 

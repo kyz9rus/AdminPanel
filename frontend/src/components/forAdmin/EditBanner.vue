@@ -18,8 +18,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="imgsrc">ImgSrc</label>
-                    <input type="text" class="form-control" id="imgsrc" v-model="banner.imgsrc" name="imgsrc">
+                    <label for="imgSrc">ImgSrc</label>
+                    <input type="text" class="form-control" id="imgSrc" v-model="banner.imgSrc" name="imgSrc">
                 </div>
 
                 <div class="form-group">
@@ -33,9 +33,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="targeturl">TargetUrl</label>
-                    <input type="text" class="form-control" id="targeturl" v-model="banner.targeturl" name="targeturl">
-                </div>
+                    <label for="targetUrl">TargetUrl</label>
+                    <input type="texI" class="form-control" id="targetUrl" v-model="banner.targetUrl" name="targetUrl">
+                </dIv>
 
                 <div class="form-group">
                     <label for="langid">LangId</label>
@@ -68,11 +68,11 @@
             return{
                 banner: {
                     id: 0,
-                    imgsrc: '',
+                    imgSrc: '',
                     width: 0,
                     height: 0,
-                    targeturl: '',
-                    langid: '',
+                    targetUrl: '',
+                    langId: '',
                 },
                 submitted: false,
                 errors: [],
@@ -88,18 +88,18 @@
 
                 var data = {
                     id:        this.banner.id,
-                    imgsrc:    this.banner.imgsrc,
+                    imgSrc:    this.banner.imgSrc,
                     width:     this.banner.width,
                     height:    this.banner.height,
-                    targeturl: this.banner.targeturl,
-                    langid:    this.banner.langid,
+                    targetUrl: this.banner.targetUrl,
+                    langId:    this.banner.langId,
                 };
 
                 http
-                    .put("/admin/editBanner/" + this.adminName, data)
+                    .put("/admin/editBanner", data)
                     .then(response => {
                         if (response.status = 'OK'){
-                            this.banner.id = response.data;
+                            this.banner.id = response.data.banner.id;
                             this.success = true;
                         }
                     })

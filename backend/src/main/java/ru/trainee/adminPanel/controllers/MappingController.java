@@ -17,15 +17,4 @@ public class MappingController {
 
     @RequestMapping("/admin")
     public String toAdmin(){ return "admin.html"; }
-
-//    @GetMapping("/")
-//    public String main(Model model, @AuthenticationPrincipal User user){
-//        HashMap<Object, Object> data = new HashMap<>();
-//
-//        data.put("profile", user);
-//
-//        model.addAttribute("frontendData", data);
-//
-//        return "index";
-//    }
 }

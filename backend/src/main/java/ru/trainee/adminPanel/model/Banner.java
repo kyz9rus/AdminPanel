@@ -1,20 +1,17 @@
 package ru.trainee.adminPanel.model;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Integer.class)
 public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "banner_id")
-    private int id;
+    private Long id;
     @NotNull
     @Column(name = "imgsrc")
     private String imgSrc;
@@ -31,11 +28,11 @@ public class Banner {
 
     public Banner(){}
 
-    public Banner(int id){
+    public Banner(Long id){
         this.id = id;
     }
 
-    public Banner(int id, String imgSrc, int width, int height, String targetUrl, String langId) {
+    public Banner(Long id, String imgSrc, int width, int height, String targetUrl, String langId) {
         this.id = id;
         this.imgSrc = imgSrc;
         this.width = width;

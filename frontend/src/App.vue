@@ -7,11 +7,6 @@
 
 <script>
 export default {
-    data() {
-        return {
-            greeting: 'Welcome to the Banner Page!'
-        }
-    },
     name: 'App'
 }
 
@@ -28,7 +23,8 @@ export default {
 
   .content{
     flex: 1 0 auto;
-    margin: 50px auto !important;
+    margin: 50px auto;
+    min-height: 700px;
     padding: 10px;
   }
 

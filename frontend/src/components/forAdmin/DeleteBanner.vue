@@ -40,11 +40,11 @@
             return{
                 banner: {
                     id: 0,
-                    imgsrc: null,
+                    imgSrc: null,
                     width: 0,
                     height: 0,
-                    targeturl: null,
-                    langid: null,
+                    targetUrl: null,
+                    langId: null,
                 },
                 submitted: false,
                 error: '',
@@ -58,17 +58,8 @@
                     e.preventDefault();
                 }
 
-                var data = {
-                    id:        this.banner.id,
-                    imgsrc:    this.banner.imgsrc,
-                    width:     this.banner.width,
-                    height:    this.banner.height,
-                    targeturl: this.banner.targeturl,
-                    langid:    this.banner.langid,
-                };
-
                 http
-                    .delete("/admin/deleteBanner/" + data.id + "/" + this.adminName)
+                    .delete("/admin/deleteBanner/" + this.banner.id)
                     .then(response => {
                         if (response.status = 'OK')
                             this.success = true;

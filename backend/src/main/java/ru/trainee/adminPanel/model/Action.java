@@ -8,26 +8,13 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Integer.class)
 public class Action {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @JsonBackReference
-//    public Banner getBanner(){
-//        return banner;
-//    }
-
-//    @JsonBackReference
-//    public User getUser(){
-//        return user;
-//    }
-
     @NotNull
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-//    @JoinColumn(name="banner_id")
-    private int banner_id;
+    private Long banner_id;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
@@ -35,22 +22,26 @@ public class Action {
     private User user;
 
     @NotNull
-    private String actionname;
+    @Column(name="actionname")
+    private String actionName;
     @NotNull
-    private String actiontime;
+    @Column(name="actiontime")
+    private String actionTime;
 
     public Action(){}
 
-    public Action(int banner_id, User user, String actionName, String actiontime){
+    public Action(Long banner_id, User user, String actionName, String actionTime){
         this.banner_id = banner_id;
         this.user = user;
-        this.actionname = actionName;
-        this.actiontime = actiontime;
+        this.actionName = actionName;
+        this.actionTime = actionTime;
     }
 
     @Override
     public String toString(){
-        return "Action {id:" + id + ", banner_id:" + banner_id + ", userName:" + user.getLogin() + ", actionName:" + actionname + ", actionTime:" + actiontime + "}";
+        return "Action {id:" + id + ", banner_id:" + banner_id + ", userName:" + user.getLogin() + ", actionName:" + actionName + ", actionTime:" + actionTime + "}";
     }
+
+    enum ActionName{ADD, EDIT, DELETE}
 
 }

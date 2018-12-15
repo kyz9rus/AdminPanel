@@ -1,11 +1,11 @@
 <template>
     <div class="log">
         <div>
-            <button id="submitLogBut" v-on:click="showLog" class="btn btn-success">{{ show }}</button>
+            <button id="submitLogBut" v-on:click="showLog" class="btn btn-success">{{ textButton }}</button>
         </div>
 
         <div v-if="submitted && success">
-            <table class="logTable">
+            <table v-show="showTable" class="logTable">
                 <tr>
                     <td>Action id</td>
                     <td>Banner id</td>
@@ -18,8 +18,8 @@
                     <td>{{ action.id }}</td>
                     <td>{{ action.banner_id }}</td>
                     <td>{{ action.user }}</td>
-                    <td>{{ action.actionname }}</td>
-                    <td>{{ action.actiontime }}</td>
+                    <td>{{ action.actionName }}</td>
+                    <td>{{ action.actionTime }}</td>
                 </tr>
             </table>
         </div>
@@ -38,27 +38,25 @@
         data (){
             return{
                 actions: [],
-                show: 'Show',
+                textButton: 'Show',
                 submitted: false,
-                success: true
+                success: true,
+                showTable: false
             }
         },
         methods: {
             showLog(){
-                if (this.show === 'Show') {
+                if (this.textButton === 'Show') {
                     http
                         .get("/admin/getAllActions")
                         .then(response => {
                             if (response.status = 'OK') {
-                                console.log("DATA:" + response.data);
                                 this.actions = response.data;
                                 this.actions[0].user = response.data[0].user.login;
 
-                                console.log(response.data);
-
                                 this.success = true;
-                                this.show = 'Hide';
-                                $('.logTable').show();
+                                this.textButton = 'Hide';
+                                this.showTable = true;
                             }
                             else
                                 this.success = false;
@@ -70,8 +68,8 @@
                     this.submitted = true;
                 }
                 else{
-                    $('.logTable').hide();
-                    this.show = 'Show';
+                    this.showTable = false;
+                    this.textButton = 'Show';
                 }
 
             }

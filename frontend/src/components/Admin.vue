@@ -1,6 +1,6 @@
 <template>
     <div class="wrapperForFooter">
-        <app-header :greeting="greeting" :page="backPage" :action="pathTo"></app-header>
+        <app-header :greeting="greeting" :backPage="backPage" :action="pathTo" @adminName="adminName = $event"></app-header>
 
         <button class="menuButton" @click="show = !show">
             <ion-icon class="ion-navicon" name="menu"></ion-icon>
@@ -11,11 +11,11 @@
         <transition name="slide">
             <aside v-show="show" >
                 <ul class="buttons">
-                    <li><input type="button" class="btn" value="Добавить баннер" @click="showOperation('app-addBanner')"/></li>
-                    <li><input type="button" class="btn" value="Редактировать баннер" @click="showOperation('app-editBanner')"/></li>
-                    <li><input type="button" class="btn" value="Удалить баннер" @click="showOperation('app-deleteBanner')"/></li>
-                    <li><input type="button" class="btn" value="Посмотреть историю изменения баннеров" @click="showOperation('app-log')"/></li>
-                    <li><input type="button" class="btn" value="Открыть тестовую страницу для просмотра баннеров" @click="showOperation('app-banners')"/></li>
+                    <li><input type="button" class="btn" value="Add banner" @click="showOperation('app-addBanner')"/></li>
+                    <li><input type="button" class="btn" value="Edit banner" @click="showOperation('app-editBanner')"/></li>
+                    <li><input type="button" class="btn" value="Delete banner" @click="showOperation('app-deleteBanner')"/></li>
+                    <li><input type="button" class="btn" value="See banner change history" @click="showOperation('app-log')"/></li>
+                    <li><input type="button" class="btn" value="Open test page to view banners" @click="showOperation('app-banners')"/></li>
                 </ul>
             </aside>
         </transition>
@@ -27,35 +27,27 @@
             <app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails"></app-banners>
             <app-log></app-log>
 
-
         </div>
         <app-footer></app-footer>
     </div>
 </template>
 
 <script>
-    import http from "../http-common";
-
     export default {
         data(){
             return {
-                greeting: 'Welcome to the Admin Page!',
-                backPage: 'Main page',
-                pathTo:   '/',
-                adminName: '1',
                 pathToBannerDetails: 'banner-details-admin',
-                show: false
+                show: false,
+                adminName: '',
+                backPage: 'Main page',
+                pathTo: '/',
+                greeting: 'Welcome to the Admin Page!'
             }
         },
         name: "admin",
         methods: {
             showOperation(operation){
                 this.show = false;
-                http
-                    .get('admin/getAdminName')
-                    .then((response) => {
-                       this.adminName = response.data
-                    });
 
                 switch (operation) {
                     case "app-addBanner":        $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); $('.testPage').hide(); break;
@@ -73,10 +65,9 @@
 <style scoped>
     aside {
         background-color: #fff;
-        width: 400px;
+        width: 250px;
         position: fixed;
         top: 167px;
-        margin-top: -4px;
         height: 600px;
         left: 0;
         bottom: 0;
@@ -106,14 +97,10 @@
     button:active {
         background-color: rgba(0,0,0,0.1);
     }
-
-    .content{
-        min-height: 700px;
-    }
     .buttons{
-        margin-top: -200px;
-        margin-left: -20px;
-
+        position: fixed;
+        top: 167px;
+        margin-left: -40px;
     }
     .buttons input{
         font-size: 13px;

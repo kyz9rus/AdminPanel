@@ -7,21 +7,15 @@
             </div>
 
             <div class="loginBlock col-md-2 col-sm-2 col-xs-2">
-                <form method="POST" :action="authAction">
-                    <button type="submit" class="login">Login</button>
+                <form method="POST" :action="authPath">
+                    <button type="submit" class="login">{{ buttonName }}</button>
                 </form>
-
-                <!--<form method="POST" action="/login">-->
-                    <!--<button type="submit" class="login">Login</button>-->
-                <!--</form>-->
 
                 <form :action="action">
                     <button type="submit">
-                        {{ page }}
+                        {{ backPage }}
                     </button>
                 </form>
-
-                <!--<p class="greeting">{{#greeting}} {{.}} {{/greeting}}</p>-->
             </div>
         </div>
     </div>
@@ -43,7 +37,6 @@
     }
 
     .loginBlock button{
-        /*background: black;*/
         background: linear-gradient(180deg, grey, black);
         width: 120px;
         height: 45px;
@@ -59,10 +52,37 @@
 </style>
 
 <script>
+    import http from "../http-common";
+
     export default {
-        props: ['greeting', 'page', 'action', 'authAction'],
         data(){
-            return{}
+            return{
+                adminName: '',
+                buttonName: '',
+                authPath: ''
+            }
+        },
+        props: ['greeting', 'backPage', 'action'],
+        mounted: function () {
+            http
+                .get('/getAuthority')
+                .then((response) => {
+
+                    if (response.data === 'anonymousUser'){
+                        console.log("anonymousUser");
+
+                        this.buttonName = 'Login';
+                        this.authPath = '/login';
+                    } else {
+                        console.log(response.data.authorities[0].authority + ": " + response.data.login);
+
+                        this.adminName = response.data.login;
+                        this.buttonName = 'Logout';
+                        this.authPath = '/logout';
+                    }
+
+                    this.$emit("adminName", this.adminName)
+                });
         }
     }
 </script>

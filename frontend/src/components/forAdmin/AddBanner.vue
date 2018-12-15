@@ -108,9 +108,9 @@
                 };
 
                 http
-                    .post("/admin/saveBanner/" + this.adminName, data)
+                    .post("/admin/saveBanner", data)
                     .then(response => {
-                        console.log(response.data);
+
                         if (response.status = 'OK'){
                             this.banner.id = response.data;
                             this.success = true;

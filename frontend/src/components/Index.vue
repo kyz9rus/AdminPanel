@@ -1,9 +1,9 @@
 <template>
     <div class="wrapperForFooter">
-        <app-header :greeting="greeting" :page="backPage" :action="pathToAdmin" :authAction="'/login'"></app-header>
+        <app-header :greeting="greeting" :backPage="backPage" :action="pathTo"></app-header>
 
             <div class="content">
-                <app-banners :bannerDetailsName="pathToBannerDetails"></app-banners>
+                <app-banners :bannerDetailsName="pathToBannerDetails" :allowScale="allowScale"></app-banners>
 
                 <br/>
 
@@ -18,13 +18,12 @@ export default {
         name: "index",
         data() {
             return {
-                greeting: 'Welcome to the Banner Page!',
+                pathToBannerDetails: 'banner-details-index',
                 backPage: 'Admin page',
-                pathToAdmin: '/admin',
-                authority: '',
-                pathToBannerDetails: 'banner-details-index'
-            };
-        },
-        methods: {}
+                pathTo: '/admin',
+                greeting: 'Welcome to the Main Page!',
+                allowScale: true
+            }
+        }
     };
 </script>
