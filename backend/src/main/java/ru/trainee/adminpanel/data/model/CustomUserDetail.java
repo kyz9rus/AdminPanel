@@ -1,4 +1,4 @@
-package ru.trainee.adminPanel.model;
+package ru.trainee.adminpanel.data.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

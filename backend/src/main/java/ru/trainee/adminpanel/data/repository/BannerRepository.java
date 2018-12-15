@@ -1,11 +1,10 @@
-package ru.trainee.adminPanel.repository;
+package ru.trainee.adminpanel.data.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.trainee.adminPanel.model.Banner;
+import ru.trainee.adminpanel.data.model.Banner;
 
 public interface BannerRepository extends JpaRepository<Banner, Long> {
     @Transactional

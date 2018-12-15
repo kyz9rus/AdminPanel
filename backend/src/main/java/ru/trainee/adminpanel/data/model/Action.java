@@ -1,6 +1,5 @@
-package ru.trainee.adminPanel.model;
+package ru.trainee.adminpanel.data.model;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;

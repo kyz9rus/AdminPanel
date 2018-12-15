@@ -1,22 +1,22 @@
-package ru.trainee.adminPanel.service;
+package ru.trainee.adminpanel.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import ru.trainee.adminPanel.model.Action;
-import ru.trainee.adminPanel.model.Banner;
-import ru.trainee.adminPanel.model.User;
-import ru.trainee.adminPanel.repository.ActionRepository;
-import ru.trainee.adminPanel.repository.BannerRepository;
+import ru.trainee.adminpanel.data.model.Action;
+import ru.trainee.adminpanel.data.model.Banner;
+import ru.trainee.adminpanel.data.model.User;
+import ru.trainee.adminpanel.data.repository.ActionRepository;
+import ru.trainee.adminpanel.data.repository.BannerRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static ru.trainee.adminPanel.other.Constants.ERROR_CODE;
-import static ru.trainee.adminPanel.other.Constants.SUCCESS_CODE;
+import static ru.trainee.adminpanel.other.Constant.ERROR_CODE;
+import static ru.trainee.adminpanel.other.Constant.SUCCESS_CODE;
 
 @RequiredArgsConstructor
 @Service

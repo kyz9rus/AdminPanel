@@ -1,13 +1,10 @@
-package ru.trainee.adminPanel.model;
+package ru.trainee.adminpanel.data.model;
 
 import com.fasterxml.jackson.annotation.*;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Externalizable;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 

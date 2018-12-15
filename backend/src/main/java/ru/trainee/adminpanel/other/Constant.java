@@ -1,6 +1,6 @@
-package ru.trainee.adminPanel.other;
+package ru.trainee.adminpanel.other;
 
-public class Constants {
+public class Constant {
     public static final int ERROR_CODE = 0;
     public static final int SUCCESS_CODE = 1;
 

@@ -1,9 +1,7 @@
-package ru.trainee.adminPanel.repository;
+package ru.trainee.adminpanel.data.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.trainee.adminPanel.model.User;
-
-import java.util.Optional;
+import ru.trainee.adminpanel.data.model.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 }

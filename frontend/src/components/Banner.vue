@@ -4,11 +4,6 @@
             <h4>Banner id: {{ this.banner.id }}</h4>
             <img @click="hideBanner" src="../assets/img/cross.png" alt="X"/><br/>
             <div>
-                <!--<option>bannerId</option>
-                    <option>width</option>
-                    <option>height</option>
-                    <option>targetUrl</option>
-                    <option>langId</option>-->
                 <label>Width: {{ this.banner.width }}px</label><br/>
                 <label>Height: {{ this.banner.height }}px</label><br/>
                 <label>Target url: <a :href="this.banner.targetUrl">{{this.banner.targetUrl}}</a></label><br/>

@@ -2,8 +2,7 @@
     <div class="testPage">
         <div class="list row col-md-12">
 
-            <div @click="retrieveBanners">HELLO</div>
-
+            {{windowWidth}}
             <div v-if="this.adminName">
                 <app-action-with-banners @action="answer = $event" :languages="languages" v-on:actionValue="getActionValue"></app-action-with-banners>
             </div>
@@ -20,7 +19,7 @@
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
-                                        <img :width="'100%'" :height="'banner.height%'" :src="banner.imgSrc" @click="showBanner"/>
+                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
                                     </a>
                                 </div>
                             </router-link>
@@ -37,7 +36,7 @@
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
-                                        <img :width="'100%'" :height="'banner.height%'" :src="banner.imgSrc" @click="showBanner"/>
+                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
                                     </a>
                                 </div>
                             </router-link>
@@ -77,8 +76,8 @@
         data() {
             return {
                 banners: [
-                    {id: 1, width: 400, height: 200, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.lada.ru'},
-                    {id: 2, width: 200, height: 100, imgSrc: '/static/img/acura.jpg', langId: 'English', targetUrl: 'https://www.alada.ru'},
+                    {id: 1, width: 400, height: 100, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.lada.ru'},
+                    {id: 2, width: 200, height: 20, imgSrc: '/static/img/acura.jpg', langId: 'English', targetUrl: 'https://www.alada.ru'},
                     {id: 3, width: 200, height: 200, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.blada.ru'},
                     {id: 4, width: 230, height: 300, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.blada.ru'}
                 ],
@@ -86,7 +85,7 @@
                 show: true,
                 answer: '',
                 actionValue: '',
-                isScaled: false
+                windowWidth: window.innerWidth
             };
         },
         methods: {
@@ -105,22 +104,10 @@
                         });
                         this.languages = Array.from(uniqueLanguages);
 
-                        if (this.allowScale && !this.isScaled)
-                            this.banners = this.doScale(this.banners);
                     })
                     .catch(e => {
                         console.log(e);
                     });
-            },
-            doScale(banners){
-                banners.map(banner => {
-                    banner.height = banner.height * 100 / banner.width;
-
-                    console.log(banner.height);
-                });
-                this.isScaled = true;
-
-                return banners;
             },
             getActionValue : function(actionValue){
                 this.actionValue = actionValue;
@@ -131,9 +118,19 @@
             showBanner(){
                 $('.descBanner').show();
             },
+            handleResize (event) {
+                this.windowWidth = event.currentTarget.innerWidth;
+                this.banners.map(banner => {
+                    banner.height = (this.windowWidth - banner.width)*banner.height/banner.width;
+                });
+            },
+        },
+        beforeDestroy: function () {
+            window.removeEventListener('resize', this.handleResize)
         },
         mounted() {
             this.retrieveBanners();
+            window.addEventListener('resize', this.handleResize)
         },
         computed: {
             sortedBanners(){
@@ -202,6 +199,7 @@
             }
         },
     }
+
 </script>
 
 <style scoped>

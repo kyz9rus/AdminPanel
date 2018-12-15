@@ -1,13 +1,13 @@
-package ru.trainee.adminPanel.service;
+package ru.trainee.adminpanel.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.trainee.adminPanel.model.CustomUserDetail;
-import ru.trainee.adminPanel.model.User;
-import ru.trainee.adminPanel.repository.UserRepository;
+import ru.trainee.adminpanel.data.model.CustomUserDetail;
+import ru.trainee.adminpanel.data.model.User;
+import ru.trainee.adminpanel.data.repository.UserRepository;
 
 import java.util.Optional;
 
