@@ -17,7 +17,7 @@
                 <tr v-for="(action, index) in actions" :key="index">
                     <td>{{ action.id }}</td>
                     <td>{{ action.banner_id }}</td>
-                    <td>{{ action.user.login }}</td>
+                    <td>{{ action.user }}</td>
                     <td>{{ action.actionname }}</td>
                     <td>{{ action.actiontime }}</td>
                 </tr>
@@ -51,14 +51,15 @@
                         .get("/admin/getAllActions")
                         .then(response => {
                             if (response.status = 'OK') {
+                                console.log("DATA:" + response.data);
                                 this.actions = response.data;
+                                this.actions[0].user = response.data[0].user.login;
 
                                 console.log(response.data);
-                                console.log(response.data[0].user);
-                                console.log(response.data[0].user.login);
-
 
                                 this.success = true;
+                                this.show = 'Hide';
+                                $('.logTable').show();
                             }
                             else
                                 this.success = false;
@@ -68,8 +69,6 @@
                         });
 
                     this.submitted = true;
-                    this.show = 'Hide';
-                    $('.logTable').show();
                 }
                 else{
                     $('.logTable').hide();

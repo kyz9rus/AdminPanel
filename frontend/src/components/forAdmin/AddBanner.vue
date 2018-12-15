@@ -2,7 +2,7 @@
     <div class="addBanner">
         <div class="submitform">
             <h1 class="nameOperation">Add Banner</h1>
-            {{adminName}}
+
             <div v-if="errors.length">
                 <label class="error">Please correct the following error(s):</label>
                 <ul>
@@ -85,8 +85,10 @@
                     this.errors.push('id is required');
                 if(!this.banner.imgsrc)
                     this.errors.push('imgSrc is required');
-                if(!this.banner.width)
+                if(!this.banner.width){
                     this.errors.push('width is required');
+                    this.banner.width = null
+                }
                 if(!this.banner.height)
                     this.errors.push('height is required');
                 if(!this.banner.targeturl)

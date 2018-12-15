@@ -4,7 +4,10 @@
 
             <h4>Banners List</h4>
             <ul>
+                <!--<input type="text" v-model="input" autofocus>-->
+
                 <li v-for="(banner, id) in banners" :key="id" @click="showBanner">
+                <!--<li v-for="(banner, id) in banners | orderBy 'langid" | filterBy input :key="id" @click="showBanner">-->
                     <router-link :to="{
                                         name: 'banner-details',
                                         params: { banner: banner, id: banner.id}

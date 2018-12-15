@@ -2,18 +2,12 @@
     <div v-if="this.banner">
         <div class="descBanner" align="center" v-show="show">
             <h4>Banner {{ this.banner.id }}</h4>
-            <img @click="hideBanner" src="../assets/img/cross.png" alt="X"/>
+            <img @click="hideBanner" src="../assets/img/cross.png" alt="X"/><br/>
             <div>
                 <label>Site: <a :href="this.banner.targeturl">{{this.banner.targeturl}}</a></label>  <br/>
                 <label>Language: </label> {{this.banner.langid}}
             </div>
         </div>
-    </div>
-    <div v-else>
-        <!--<div class="descBanner" align="center" v-on:click="hideWindow">-->
-            <!--<br/>-->
-            <!--<p>Please click on a Banner...</p>-->
-        <!--</div>-->
     </div>
 </template>
 
