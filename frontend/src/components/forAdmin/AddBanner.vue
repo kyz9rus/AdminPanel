@@ -17,8 +17,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="imgsrc">ImgSrc</label>
-                    <input type="text" class="form-control" id="imgsrc" required v-model="banner.imgsrc" name="imgsrc">
+                    <label for="imgSrc">ImgSrc</label>
+                    <input type="text" class="form-control" id="imgSrc" required v-model="banner.imgSrc" name="imgSrc">
                 </div>
 
                 <div class="form-group">
@@ -32,13 +32,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="targeturl">TargetUrl</label>
-                    <input type="text" class="form-control" id="targeturl" required v-model="banner.targeturl" name="targeturl">
+                    <label for="targetUrl">TargetUrl</label>
+                    <input type="text" class="form-control" id="targetUrl" required v-model="banner.targetUrl" name="targetUrl">
                 </div>
 
                 <div class="form-group">
-                    <label for="langid">LangId</label>
-                    <input type="text" class="form-control" id="langid" required v-model="banner.langid" name="langid">
+                    <label for="langId">LangId</label>
+                    <input type="text" class="form-control" id="langId" required v-model="banner.langId" name="langId">
                 </div>
 
                 <button v-on:click="saveBanner" class="btn btn-success">Submit</button>
@@ -67,11 +67,11 @@
             return {
                 banner: {
                     id: 0,
-                    imgsrc: null,
+                    imgSrc: null,
                     width: 0,
                     height: 0,
-                    targeturl: null,
-                    langid: null,
+                    targetUrl: null,
+                    langId: null,
                 },
                 submitted: false,
                 errors: [],
@@ -80,10 +80,9 @@
         },
         methods: {
             saveBanner() {
-
                 if (!this.banner.id)
                     this.errors.push('id is required');
-                if(!this.banner.imgsrc)
+                if(!this.banner.imgSrc)
                     this.errors.push('imgSrc is required');
                 if(!this.banner.width){
                     this.errors.push('width is required');
@@ -91,21 +90,21 @@
                 }
                 if(!this.banner.height)
                     this.errors.push('height is required');
-                if(!this.banner.targeturl)
-                    this.errors.push('targeturl is required');
-                if(!this.banner.langid)
-                    this.errors.push('langid is required');
+                if(!this.banner.targetUrl)
+                    this.errors.push('targetUrl is required');
+                if(!this.banner.langId)
+                    this.errors.push('langId is required');
 
                 if (this.errors.length !== 0)
                     e.preventDefault();
 
                 var data = {
                     id:        this.banner.id,
-                    imgsrc:    this.banner.imgsrc,
+                    imgSrc:    this.banner.imgSrc,
                     width:     this.banner.width,
                     height:    this.banner.height,
-                    targeturl: this.banner.targeturl,
-                    langid:    this.banner.langid,
+                    targetUrl: this.banner.targetUrl,
+                    langId:    this.banner.langId,
                 };
 
                 http

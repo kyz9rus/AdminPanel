@@ -3,17 +3,21 @@
         <div class="row" align="center">
 
             <div class="name col-md-10 col-sm-10 col-xs-10">
-                <p class="mainText">{{ msg }}</p>
+                <p class="mainText">{{ greeting }}</p>
             </div>
 
             <div class="loginBlock col-md-2 col-sm-2 col-xs-2">
-                <form method="POST" action="/login">
+                <form method="POST" :action="authAction">
                     <button type="submit" class="login">Login</button>
                 </form>
 
-                <form :action="msg3">
+                <!--<form method="POST" action="/login">-->
+                    <!--<button type="submit" class="login">Login</button>-->
+                <!--</form>-->
+
+                <form :action="action">
                     <button type="submit">
-                        {{ msg2 }}
+                        {{ page }}
                     </button>
                 </form>
 
@@ -56,7 +60,7 @@
 
 <script>
     export default {
-        props: ['msg', 'msg2', 'msg3'],
+        props: ['greeting', 'page', 'action', 'authAction'],
         data(){
             return{}
         }

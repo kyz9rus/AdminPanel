@@ -45,7 +45,6 @@
         },
         methods: {
             showLog(){
-                // this.$emit('isClicked', this.submitted);
                 if (this.show === 'Show') {
                     http
                         .get("/admin/getAllActions")

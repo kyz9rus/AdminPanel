@@ -1,6 +1,6 @@
 <template>
     <div class="wrapperForFooter">
-        <app-header :msg="greeting" :msg2="backPage" :msg3="pathTo"></app-header>
+        <app-header :greeting="greeting" :page="backPage" :action="pathTo"></app-header>
 
         <button class="menuButton" @click="show = !show">
             <ion-icon class="ion-navicon" name="menu"></ion-icon>
@@ -21,10 +21,9 @@
         </transition>
 
         <div class="content">
-            <app-addBanner :adminName="adminName"></app-addBanner>
-            <app-editBanner :adminName="adminName"></app-editBanner>
-            <app-deleteBanner :adminName="adminName"></app-deleteBanner>
-            <!--<app-log @isClicked="show = $event"></app-log>-->
+            <app-add-banner :adminName="adminName"></app-add-banner>
+            <app-edit-banner :adminName="adminName"></app-edit-banner>
+            <app-delete-banner :adminName="adminName"></app-delete-banner>
             <app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails"></app-banners>
             <app-log></app-log>
 

@@ -70,7 +70,7 @@
                 http
                     .delete("/admin/deleteBanner/" + data.id + "/" + this.adminName)
                     .then(response => {
-                        if (response.data === true)
+                        if (response.status = 'OK')
                             this.success = true;
                     })
                     .catch(e => {

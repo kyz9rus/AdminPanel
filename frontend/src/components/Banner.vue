@@ -4,8 +4,8 @@
             <h4>Banner {{ this.banner.id }}</h4>
             <img @click="hideBanner" src="../assets/img/cross.png" alt="X"/><br/>
             <div>
-                <label>Site: <a :href="this.banner.targeturl">{{this.banner.targeturl}}</a></label>  <br/>
-                <label>Language: </label> {{this.banner.langid}}
+                <label>Site: <a :href="this.banner.targetUrl">{{this.banner.targetUrl}}</a></label>
+                <label>Language: </label> {{this.banner.langId}}
             </div>
         </div>
     </div>

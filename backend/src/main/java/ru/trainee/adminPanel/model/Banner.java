@@ -16,20 +16,18 @@ public class Banner {
     @Column(name = "banner_id")
     private int id;
     @NotNull
-    private String imgsrc;
+    @Column(name = "imgsrc")
+    private String imgSrc;
     @NotNull
     private int width;
     @NotNull
     private int height;
     @NotNull
-    private String targeturl;
+    @Column(name = "targeturl")
+    private String targetUrl;
     @NotNull
-    private String langid;
-
-//    @JsonBackReference
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "banner")
-//    private List<Action> actions;
+    @Column(name = "langid")
+    private String langId;
 
     public Banner(){}
 
@@ -37,17 +35,17 @@ public class Banner {
         this.id = id;
     }
 
-    public Banner(int id, String imgsrc, int width, int height, String targeturl, String langid) {
+    public Banner(int id, String imgSrc, int width, int height, String targetUrl, String langId) {
         this.id = id;
-        this.imgsrc = imgsrc;
+        this.imgSrc = imgSrc;
         this.width = width;
         this.height = height;
-        this.targeturl = targeturl;
-        this.langid = langid;
+        this.targetUrl = targetUrl;
+        this.langId = langId;
     }
 
     @Override
     public String toString(){
-        return "Banner {id:" + id + ", imgSrc:" + imgsrc + ", width:" + width + ", height:" + height + ", targetUrl:" + targeturl + ", langId:" + langid + "}";
+        return "Banner {id:" + id + ", imgSrc:" + imgSrc + ", width:" + width + ", height:" + height + ", targetUrl:" + targetUrl + ", langId:" + langId + "}";
     }
 }

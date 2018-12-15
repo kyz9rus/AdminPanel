@@ -1,7 +1,7 @@
 package ru.trainee.adminPanel.service;
 
-import ru.trainee.adminPanel.other.Constants;
 import lombok.RequiredArgsConstructor;
+import lombok.var;
 import org.springframework.stereotype.Service;
 import ru.trainee.adminPanel.model.Action;
 import ru.trainee.adminPanel.model.Banner;
@@ -29,7 +29,7 @@ public class BannerService {
         System.out.println("Add new banner: " + banner + " by " + adminName + "...");
 
         try {
-            bannerRepository.saveBanner(banner.getId(), banner.getImgsrc(), banner.getWidth(), banner.getHeight(), banner.getTargeturl(), banner.getLangid());
+            bannerRepository.saveBanner(banner.getId(), banner.getImgSrc(), banner.getWidth(), banner.getHeight(), banner.getTargetUrl(), banner.getLangId());
         }catch (Exception e){
             e.printStackTrace();
             return ERROR_CODE;
@@ -106,14 +106,14 @@ public class BannerService {
         if (bannerFromForm.getWidth() != 0)
             bannerFromDb.setWidth(bannerFromForm.getWidth());
 
-        if (bannerFromForm.getImgsrc().length() != 0)
-            bannerFromDb.setImgsrc(bannerFromForm.getImgsrc());
+        if (bannerFromForm.getImgSrc().length() != 0)
+            bannerFromDb.setImgSrc(bannerFromForm.getImgSrc());
 
-        if (bannerFromForm.getTargeturl().length() != 0)
-            bannerFromDb.setTargeturl(bannerFromForm.getTargeturl());
+        if (bannerFromForm.getTargetUrl().length() != 0)
+            bannerFromDb.setTargetUrl(bannerFromForm.getTargetUrl());
 
-        if (bannerFromForm.getLangid().length() != 0)
-            bannerFromDb.setLangid(bannerFromForm.getLangid());
+        if (bannerFromForm.getLangId().length() != 0)
+            bannerFromDb.setLangId(bannerFromForm.getLangId());
 
         return bannerFromDb;
     }
