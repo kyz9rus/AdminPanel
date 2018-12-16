@@ -48,7 +48,7 @@
                         <div v-if="allowScale" v-bind:style="{width: 100 + '%' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, extendedMode: allowScale}}">
+                                        params: { banner: banner, id: banner.id, extendedMode: !allowScale}}">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl"  >
                                         <img :width="'100%'" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>

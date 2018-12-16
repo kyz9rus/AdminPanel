@@ -58,7 +58,7 @@
         data(){
             return{
                 adminName: '',
-                buttonName: '',
+                buttonName: 'Login',
                 authPath: ''
             }
         },

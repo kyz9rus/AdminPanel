@@ -37,7 +37,7 @@ public class BannerService {
             resultBanner = Optional.empty();
         }
 
-        Action action = new Action(banner.getId(), admin, "ADD", getCurrentDate());
+        Action action = new Action(resultBanner.get().getId(), admin, "ADD", getCurrentDate());
         System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
 
         try {
@@ -88,7 +88,7 @@ public class BannerService {
                 bannerRepository.save(resultBanner.get());
             }
 
-            Action action = new Action(banner.getId(), admin, "EDIT", getCurrentDate());
+            Action action = new Action(resultBanner.get().getId(), admin, "EDIT", getCurrentDate());
             System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
 
             actionRepository.save(action);
