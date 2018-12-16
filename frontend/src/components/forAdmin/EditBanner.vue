@@ -3,11 +3,9 @@
         <div class="submitform">
             <h1 class="nameOperation">Edit Banner</h1>
 
-            <div v-if="errors.length">
+            <div v-if="error">
                 <label class="error">Please correct the following error(s):</label>
-                <ul>
-                    <li v-for="error in errors" class="error">{{ error }}</li>
-                </ul>
+                <p  class="error">{{ error }}</p>
             </div>
 
             <div v-if="!submitted">
@@ -42,17 +40,17 @@
                     <input type="text" class="form-control" id="langid" v-model="banner.langid" name="langid">
                 </div>
 
-                <button v-on:click="editBanner" class="btn btn-success">Submit</button>
+                <button v-on:click="editBanner" class="btn btn-success">Edit</button>
             </div>
 
             <div v-else-if="success">
                 <h4>Banner with id:{{banner.id}} has changed successfully!</h4>
-                <button class="btn btn-success" v-on:click="newBanner">Edit</button>
+                <button class="btn btn-success" v-on:click="newBannerSuccess">Back</button>
             </div>
 
             <div v-else>
                 <h4>Something wrong :( Show the console log</h4>
-                <button class="btn btn-danger">Edit</button>
+                <button class="btn btn-danger" v-on:click="newBannerError">Back</button>
             </div>
         </div>
     </div>
@@ -75,15 +73,17 @@
                     langId: '',
                 },
                 submitted: false,
-                errors: [],
+                error: '',
                 success: false
             }
         },
         methods: {
             editBanner(){
+                this.error = '';
+
                 if (!this.banner.id) {
-                    this.errors.push('id is required');
-                    e.preventDefault();
+                    this.error = 'id is required and must be a number';
+                    return;
                 }
 
                 var data = {
@@ -109,10 +109,14 @@
 
                 this.submitted = true;
             },
-            newBanner() {
+            newBannerSuccess() {
                 this.submitted = false;
                 this.success = false;
                 this.banner = {};
+                this.errors = [];
+            },
+            newBannerError() {
+                this.submitted = false;
                 this.errors = [];
             }
 

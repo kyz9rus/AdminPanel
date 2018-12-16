@@ -7,7 +7,7 @@
             </div>
 
             <div class="loginBlock col-md-2 col-sm-2 col-xs-2">
-                <form method="POST" :action="authPath">
+                <form :action="authPath">
                     <button type="submit" class="login">{{ buttonName }}</button>
                 </form>
 
@@ -58,23 +58,26 @@
         data(){
             return{
                 adminName: '',
-                buttonName: 'Login',
+                buttonName: '',
                 authPath: ''
             }
         },
         props: ['greeting', 'backPage', 'action'],
-        mounted: function () {
+        created: function () {
             http
                 .get('/getAuthority')
                 .then((response) => {
+                    console.log(response.data);
+
+                    console.log(response.data.login + " !!!");
 
                     if (response.data === 'anonymousUser'){
                         console.log("anonymousUser");
 
                         this.buttonName = 'Login';
-                        this.authPath = '/login';
+                        this.authPath = this.action;
                     } else {
-                        console.log(response.data.authorities[0].authority + ": " + response.data.login);
+                        console.log(response.data.login);
 
                         this.adminName = response.data.login;
                         this.buttonName = 'Logout';
@@ -82,6 +85,7 @@
                     }
 
                     this.$emit("adminName", this.adminName)
+
                 });
         }
     }

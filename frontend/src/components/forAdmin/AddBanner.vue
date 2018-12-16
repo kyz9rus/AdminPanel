@@ -36,17 +36,17 @@
                     <input type="text" class="form-control" id="langId" required v-model="banner.langId" name="langId">
                 </div>
 
-                <button v-on:click="saveBanner" class="btn btn-success">Submit</button>
+                <button v-on:click="saveBanner" class="btn btn-success">Add</button>
             </div>
 
             <div v-else-if="success">
                 <h4>Banner with id:{{banner.id}} has added successfully!</h4>
-                <button class="btn btn-success" v-on:click="newBanner">Add</button>
+                <button class="btn btn-success" v-on:click="newBannerSuccess">Back</button>
             </div>
 
             <div v-else>
                 <h4>Something wrong :( Show the console log</h4>
-                <button v-on:click="newBanner" class="btn btn-danger">Add</button>
+                <button v-on:click="newBannerError" class="btn btn-danger">Back</button>
             </div>
         </div>
     </div>
@@ -75,16 +75,18 @@
         },
         methods: {
             saveBanner() {
+                this.errors = [];
+
                 if(!this.banner.imgSrc){
                     this.errors.push('imgSrc is required');
                     // this.banner.imgSrc = '';
                 }
                 if(!this.banner.width){
-                    this.errors.push('width is required');
+                    this.errors.push('width is required and must be a number');
                     // this.banner.width = 0;
                 }
                 if(!this.banner.height){
-                    this.errors.push('height is required');
+                    this.errors.push('height is required and must be a number');
                     // this.banner.height = 0;
                 }
                 if(!this.banner.targetUrl){
@@ -96,11 +98,9 @@
                     // this.banner.langId = '';
                 }
 
-                if (this.errors.length !== 0){
-                    this.newBanner();
+                if (this.errors.length !== 0)
                     return;
-                    // e.preventDefault();
-                }
+
 
                 var data = {
                     id:        this.banner.id,
@@ -126,13 +126,17 @@
 
                 this.submitted = true;
             },
-            newBanner() {
+            newBannerSuccess() {
                 this.submitted = false;
                 if (this.success = true){
                     this.success = false;
                     this.banner = {};
                     this.errors = [];
                 }
+            },
+            newBannerError() {
+                this.submitted = false;
+                this.errors = [];
             }
 
         }

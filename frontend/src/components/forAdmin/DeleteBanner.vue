@@ -14,17 +14,17 @@
                     <input type="number" class="form-control" id="id" required v-model="banner.id" name="id">
                 </div>
 
-                <button v-on:click="deleteBanner" class="btn btn-success">Submit</button>
+                <button v-on:click="deleteBanner" class="btn btn-success">Dekete</button>
             </div>
 
             <div v-else-if="success">
                 <h4>Banner with id:{{banner.id}} has deleted successfully!</h4>
-                <button class="btn btn-success" v-on:click="newBanner">Delete</button>
+                <button class="btn btn-success" v-on:click="newBanner">Back</button>
             </div>
 
             <div v-else>
                 <h4>Something wrong :( Show the console log</h4>
-                <button v-on:click="newBanner" class="btn btn-danger">Delete</button>
+                <button v-on:click="newBanner" class="btn btn-danger">Back</button>
             </div>
         </div>
     </div>
@@ -53,9 +53,11 @@
         },
         methods: {
             deleteBanner(){
+                this.error = '';
+
                 if (!this.banner.id) {
-                    this.error = 'id is required';
-                    e.preventDefault();
+                    this.error = 'id is required and must be a number';
+                    return;
                 }
 
                 http

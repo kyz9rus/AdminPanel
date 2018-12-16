@@ -1,6 +1,5 @@
 <template>
     <div v-if="this.banner">
-
         <div v-if="extendedMode" class="descBanner" align="center" v-show="show">
             <h4>Banner id: {{ this.banner.id }}</h4>
             <img @click="hideBanner" src="../assets/img/cross.png" alt="X"/><br/>
