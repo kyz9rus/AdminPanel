@@ -9,13 +9,11 @@ import javax.validation.constraints.NotNull;
 @Data
 @Table(name ="role")
 class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
-    private int role_id;
+    private int roleId;
     @NotNull
     private String role;
-
-    Role(){}
-
 }

@@ -12,11 +12,6 @@
 
             <div v-if="!submitted">
                 <div class="form-group">
-                    <label for="id">Id</label>
-                    <input type="number" class="form-control" id="id" required v-model="banner.id" name="id">
-                </div>
-
-                <div class="form-group">
                     <label for="imgSrc">ImgSrc</label>
                     <input type="text" class="form-control" id="imgSrc" required v-model="banner.imgSrc" name="imgSrc">
                 </div>
@@ -80,8 +75,6 @@
         },
         methods: {
             saveBanner() {
-                if (!this.banner.id)
-                    this.errors.push('id is required');
                 if(!this.banner.imgSrc)
                     this.errors.push('imgSrc is required');
                 if(!this.banner.width){
@@ -95,8 +88,10 @@
                 if(!this.banner.langId)
                     this.errors.push('langId is required');
 
-                if (this.errors.length !== 0)
+                if (this.errors.length !== 0){
+                    this.newBanner();
                     e.preventDefault();
+                }
 
                 var data = {
                     id:        this.banner.id,
@@ -110,9 +105,10 @@
                 http
                     .post("/admin/saveBanner", data)
                     .then(response => {
+                        console.log(response.data);
 
                         if (response.status = 'OK'){
-                            this.banner.id = response.data;
+                            this.banner.id = response.data.id;
                             this.success = true;
                         }
                     })

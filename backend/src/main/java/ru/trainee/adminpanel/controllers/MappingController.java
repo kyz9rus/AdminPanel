@@ -1,14 +1,15 @@
 package ru.trainee.adminpanel.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MappingController {
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String toLogin(){ return "login"; }
 
-    @PostMapping("/admin")
+    @GetMapping("/admin")
     public String toAdmin(){ return "admin.html"; }
 }

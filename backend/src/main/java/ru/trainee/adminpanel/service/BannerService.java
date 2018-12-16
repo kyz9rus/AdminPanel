@@ -1,6 +1,7 @@
 package ru.trainee.adminpanel.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,66 +16,64 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static ru.trainee.adminpanel.other.Constant.ERROR_CODE;
-import static ru.trainee.adminpanel.other.Constant.SUCCESS_CODE;
-
 @RequiredArgsConstructor
 @Service
 public class BannerService {
+
     private final BannerRepository bannerRepository;
     private final ActionRepository actionRepository;
 
-    public int saveBanner(Banner banner){
+    public Optional<Banner> saveBanner(Banner banner) {
         User admin = getUserFromAuthentication();
 
         System.out.println("Add new banner: " + banner + " by " + admin.getLogin() + "...");
 
+        Optional<Banner> resultBanner;
         try {
-            //bannerRepository.save(banner);
-            bannerRepository.saveBanner(banner.getId(), banner.getImgSrc(), banner.getWidth(), banner.getHeight(), banner.getTargetUrl(), banner.getLangId());
-        }catch (Exception e){
+            resultBanner = Optional.of(bannerRepository.save(banner));
+            bannerRepository.flush();
+        } catch (Exception e) {
             e.printStackTrace();
-            return ERROR_CODE;
+            resultBanner = Optional.empty();
         }
 
         Action action = new Action(banner.getId(), admin, "ADD", getCurrentDate());
-        System.out.println("Add action: " + action + " by " + admin.getLogin() + "...");
+        System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
 
         try {
             actionRepository.save(action);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
             bannerRepository.deleteById(banner.getId());
-            return ERROR_CODE;
+            resultBanner = Optional.empty();
         }
 
-        return SUCCESS_CODE;
+        return resultBanner;
     }
 
-    public int deleteBanner(Long id_banner){
+    public boolean deleteBanner(Long id_banner) {
         User admin = getUserFromAuthentication();
 
         try {
             System.out.println("Delete banner with id:" + id_banner + " by " + admin.getLogin() + "...");
 
             bannerRepository.deleteById(id_banner);
-            bannerRepository.flush();
 
             Action action = new Action(id_banner, admin, "DELETE", getCurrentDate());
-            System.out.println("Add action: " + action + " by " + admin.getLogin() + "...");
+            System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
 
             actionRepository.save(action);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
-            return ERROR_CODE;
+            return false;
         }
 
-        return SUCCESS_CODE;
+        return true;
     }
 
-    public Optional<Banner> editBanner(Banner banner){
+    public Optional<Banner> editBanner(Banner banner) {
         User admin = getUserFromAuthentication();
 
         Optional<Banner> resultBanner = Optional.empty();
@@ -90,11 +89,10 @@ public class BannerService {
             }
 
             Action action = new Action(banner.getId(), admin, "EDIT", getCurrentDate());
-            System.out.println("Add action: " + action + " by " + admin.getLogin() + "...");
+            System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
 
             actionRepository.save(action);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             resultBanner = Optional.empty();
         }
@@ -102,7 +100,7 @@ public class BannerService {
         return resultBanner;
     }
 
-    private Banner checkBanner(Banner bannerFromDb, Banner bannerFromForm){
+    private Banner checkBanner(Banner bannerFromDb, Banner bannerFromForm) {
         if (bannerFromForm.getHeight() != 0)
             bannerFromDb.setHeight(bannerFromForm.getHeight());
 
@@ -120,8 +118,15 @@ public class BannerService {
 
         return bannerFromDb;
     }
-    public List<Banner> showAllBanners(){ return bannerRepository.findAll(); }
-    public List<Action> getAllActions(){ return actionRepository.findAll(); }
+
+    public List<Banner> showAllBanners() {
+        return bannerRepository.findAll();
+    }
+
+    public List<Action> getAllActions() {
+        return actionRepository.findAll();
+    }
+
     public User getUserFromAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = null;
@@ -132,14 +137,14 @@ public class BannerService {
             else
                 user = new User();
 
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("There is no authentication user yet.");
         }
 
         return user;
     }
-    public String getCurrentDate(){
+
+    public String getCurrentDate() {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date currentDate = new Date();
 

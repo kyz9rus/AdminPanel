@@ -8,9 +8,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Data
 public class Action {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="action_seq")
+    @SequenceGenerator(name="action_seq", sequenceName="SEQ_ACTION", allocationSize=1)
+    private Long id;
 
     @NotNull
     private Long banner_id;
@@ -40,7 +42,4 @@ public class Action {
     public String toString(){
         return "Action {id:" + id + ", banner_id:" + banner_id + ", userName:" + user.getLogin() + ", actionName:" + actionName + ", actionTime:" + actionTime + "}";
     }
-
-    enum ActionName{ADD, EDIT, DELETE}
-
 }

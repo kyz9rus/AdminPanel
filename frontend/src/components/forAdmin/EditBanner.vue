@@ -99,7 +99,7 @@
                     .put("/admin/editBanner", data)
                     .then(response => {
                         if (response.status = 'OK'){
-                            this.banner.id = response.data.banner.id;
+                            this.banner.id = response.data.id;
                             this.success = true;
                         }
                     })

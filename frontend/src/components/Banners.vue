@@ -2,7 +2,6 @@
     <div class="testPage">
         <div class="list row col-md-12">
 
-            {{windowWidth}}
             <div v-if="this.adminName">
                 <app-action-with-banners @action="answer = $event" :languages="languages" v-on:actionValue="getActionValue"></app-action-with-banners>
             </div>
@@ -46,7 +45,19 @@
 
                 <ul v-else>
                     <li v-for="banner in banners">
-                        <div v-bind:style="{width: 90 + '%' }">
+                        <div v-if="allowScale" v-bind:style="{width: 100 + '%' }">
+                            <router-link :to="{
+                                        name: bannerDetailsName,
+                                        params: { banner: banner, id: banner.id, extendedMode: allowScale}}">
+                                <div align="center" class="banner">
+                                    <a :href="banner.targetUrl"  >
+                                        <img :width="'100%'" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
+                                    </a>
+                                </div>
+                            </router-link>
+                        </div>
+
+                        <div v-else v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
                                         params: { banner: banner, id: banner.id, extendedMode: allowScale}}">
@@ -121,16 +132,18 @@
             handleResize (event) {
                 this.windowWidth = event.currentTarget.innerWidth;
                 this.banners.map(banner => {
-                    banner.height = (this.windowWidth - banner.width)*banner.height/banner.width;
+                    banner.height = this.windowWidth * banner.height / banner.width;
+                    banner.width = this.windowWidth
                 });
-            },
-        },
+            },},
         beforeDestroy: function () {
             window.removeEventListener('resize', this.handleResize)
         },
         mounted() {
             this.retrieveBanners();
-            window.addEventListener('resize', this.handleResize)
+
+            if (typeof this.allowScale !== "undefined")
+                window.addEventListener('resize', this.handleResize)
         },
         computed: {
             sortedBanners(){

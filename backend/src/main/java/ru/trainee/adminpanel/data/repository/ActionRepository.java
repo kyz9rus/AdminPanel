@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository;
 import ru.trainee.adminpanel.data.model.Action;
 
 @Repository
-public interface ActionRepository extends JpaRepository<Action, Integer> {}
+public interface ActionRepository extends JpaRepository<Action, Long> {}
