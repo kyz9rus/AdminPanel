@@ -11,21 +11,37 @@
         <transition name="slide">
             <aside v-show="show" >
                 <ul class="buttons">
-                    <li><input type="button" class="btn" value="Add banner" @click="showOperation('app-addBanner')"/></li>
-                    <li><input type="button" class="btn" value="Edit banner" @click="showOperation('app-editBanner')"/></li>
-                    <li><input type="button" class="btn" value="Delete banner" @click="showOperation('app-deleteBanner')"/></li>
-                    <li><input type="button" class="btn" value="See banner change history" @click="showOperation('app-log')"/></li>
-                    <li><input type="button" class="btn" value="Open test page to view banners" @click="showOperation('app-banners')"/></li>
+                    <router-link :to="{name: 'add-banner', params: { adminName: adminName }}">
+                        <input type="button" class="btn" value="Add banner" @click="showOperation('app-addBanner')"/>
+                        <!--<input type="button" class="btn" value="Add banner"/>-->
+                    </router-link><br/>
+
+                    <router-link :to="{name: 'edit-banner', params: { adminName: adminName }}">
+                        <input type="button" class="btn" value="Edit banner" @click="showOperation('app-editBanner')"/>
+                    </router-link><br/>
+
+                    <router-link :to="{name: 'delete-banner', params: { adminName: adminName }}">
+                        <input type="button" class="btn" value="Delete banner" @click="showOperation('app-deleteBanner')"/>
+                    </router-link><br/>
+
+                    <router-link :to="{name: 'banner-changes'}">
+                        <input type="button" class="btn" value="See banner change history" @click="showOperation('app-log')"/>
+                    </router-link><br/>
+
+                    <router-link :to="{name: 'test-page', params: { adminName: adminName, bannerDetailsName: pathToBannerDetails}}">
+                        <input type="button" class="btn" value="Open test page to view banners" @click="showOperation('app-banners')"/>
+                    </router-link>
                 </ul>
             </aside>
         </transition>
 
         <div class="content">
-            <app-add-banner :adminName="adminName"></app-add-banner>
-            <app-edit-banner :adminName="adminName"></app-edit-banner>
-            <app-delete-banner :adminName="adminName"></app-delete-banner>
-            <app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails" :allowScale="allowScale"></app-banners>
-            <app-log></app-log>
+            <router-view></router-view>
+            <!--<app-add-banner :adminName="adminName"></app-add-banner>-->
+            <!--<app-edit-banner :adminName="adminName"></app-edit-banner>-->
+            <!--<app-delete-banner :adminName="adminName"></app-delete-banner>-->
+            <!--<app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails" :allowScale="allowScale"></app-banners>-->
+            <!--<app-log></app-log>-->
 
         </div>
         <app-footer></app-footer>

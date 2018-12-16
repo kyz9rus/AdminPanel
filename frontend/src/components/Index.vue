@@ -3,7 +3,7 @@
         <app-header :greeting="greeting" :backPage="backPage" :action="pathTo"></app-header>
 
             <div class="content">
-                <app-banners :bannerDetailsName="pathToBannerDetails" :allowScale="allowScale"></app-banners>
+                <app-banners :bannerDetailsName="pathToBannerDetails" :simplifiedMode="simplifiedMode"></app-banners>
 
                 <br/>
 
@@ -22,7 +22,7 @@ export default {
                 backPage: 'Admin page',
                 pathTo: '/admin',
                 greeting: 'Welcome to the Main Page!',
-                allowScale: true
+                simplifiedMode: true
             }
         }
     };

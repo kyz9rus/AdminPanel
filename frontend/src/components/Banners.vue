@@ -14,7 +14,7 @@
                         <div v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, extendedMode: !allowScale}
+                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode}
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
@@ -31,7 +31,7 @@
                         <div v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, extendedMode: !allowScale}
+                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode}
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
@@ -45,25 +45,10 @@
 
                 <ul v-else>
                     <li v-for="banner in banners">
-                        <!--<div v-if="allowScale" v-bind:style="{width: 100 + '%' }">-->
-                        <div v-if="allowScale" >
+                        <div v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, extendedMode: !allowScale}}">
-                                <div align="center" class="banner allowScale">
-                                    <a :href="banner.targetUrl"  >
-                                        <!--<img :width="'100%'" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>-->
-                                        <!--<img :width="'100%'" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>-->
-                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
-                                    </a>
-                                </div>
-                            </router-link>
-                        </div>
-
-                        <div v-else v-bind:style="{width: banner.width + 'px' }">
-                            <router-link :to="{
-                                        name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, extendedMode: !allowScale}}">
+                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode}}">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl"  >
                                         <img :width="'100%'" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
@@ -86,48 +71,19 @@
 
     export default {
         name: "banners-list",
-        props: ["adminName", 'bannerDetailsName', 'allowScale'],
+        props: ["adminName", 'bannerDetailsName', 'simplifiedMode'],
         data() {
             return {
                 banners: [
-                    {
-                        id: 1,
-                        width: 400,
-                        height: 100,
-                        imgSrc: '/static/img/acura.jpg',
-                        langId: 'Russian',
-                        targetUrl: 'https://www.lada.ru'
-                    },
-                    {
-                        id: 2,
-                        width: 200,
-                        height: 20,
-                        imgSrc: '/static/img/acura.jpg',
-                        langId: 'English',
-                        targetUrl: 'https://www.alada.ru'
-                    },
-                    {
-                        id: 3,
-                        width: 200,
-                        height: 200,
-                        imgSrc: '/static/img/acura.jpg',
-                        langId: 'Russian',
-                        targetUrl: 'https://www.blada.ru'
-                    },
-                    {
-                        id: 4,
-                        width: 230,
-                        height: 300,
-                        imgSrc: '/static/img/acura.jpg',
-                        langId: 'Russian',
-                        targetUrl: 'https://www.blada.ru'
-                    }
+                    {id: 1, width: 400, height: 100, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.lada.ru'},
+                    {id: 2, width: 200, height: 20, imgSrc: '/static/img/acura.jpg', langId: 'English', targetUrl: 'https://www.alada.ru'},
+                    {id: 3, width: 200, height: 200, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.blada.ru'},
+                    {id: 4, width: 230, height: 300, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.blada.ru'}
                 ],
                 languages: ['', 'Russian', 'English'],
                 show: true,
                 answer: '',
-                actionValue: '',
-                windowWidth: window.innerWidth
+                actionValue: ''
             };
         },
         methods: {
@@ -150,16 +106,6 @@
                     .catch(e => {
                         console.log(e);
                     });
-
-                // if (this.allowScale){
-                //     var windowWidth = event.currentTarget.innerWidth;
-                //
-                //     this.banners.map(banner => {
-                //         banner.height = windowWidth * banner.height / banner.width;
-                //         banner.width = this.windowWidth
-                //     });
-                // }
-
             },
             getActionValue: function (actionValue) {
                 this.actionValue = actionValue;
@@ -169,32 +115,11 @@
             },
             showBanner() {
                 $('.descBanner').show();
-            },
-            handleResize(event) {
-                this.windowWidth = event.currentTarget.innerWidth;
-                this.banners.map(banner => {
-                    banner.height = this.windowWidth * banner.height / banner.width;
-                    banner.width = this.windowWidth
-                });
-            },
-        },
-        beforeDestroy: function () {
-            window.removeEventListener('resize', this.handleResize)
+            }
         },
         mounted() {
             this.retrieveBanners();
-
-            if (typeof this.allowScale !== "undefined")
-                window.addEventListener('resize', this.handleResize)
         },
-        // created() {
-        //     $('.allowScale a img').each(function(){
-        //         $(this).attr('height', window.innerWidth * $(this).attr('height') / $(this).attr('width'));
-        //         $(this).attr('width', '100%');
-        //
-        //         alert('AFTER WIDTH : ' + $(this).attr('width') + "  HEIGHT: " + $(this).attr('height'))
-        //     });
-        // },
         computed: {
             sortedBanners() {
                 switch (this.actionValue) {

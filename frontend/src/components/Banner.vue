@@ -1,6 +1,6 @@
 <template>
     <div v-if="this.banner">
-        <div v-if="extendedMode" class="descBanner" align="center" v-show="show">
+        <div v-if="!simplifiedMode" class="descBanner" align="center" v-show="show">
             <h4>Banner id: {{ this.banner.id }}</h4>
             <img @click="hideBanner" src="../assets/img/cross.png" alt="X"/><br/>
             <div>
@@ -26,7 +26,7 @@
 
     export default {
         name: "banner",
-        props: ["banner", "extendedMode"],
+        props: ["banner", "simplifiedMode"],
         data(){
             return{
                 show: true

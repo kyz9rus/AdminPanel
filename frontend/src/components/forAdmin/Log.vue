@@ -1,5 +1,5 @@
 <template>
-    <div class="log">
+    <div>
         <div>
             <button id="submitLogBut" v-on:click="showLog" class="btn btn-success">{{ textButton }}</button>
         </div>

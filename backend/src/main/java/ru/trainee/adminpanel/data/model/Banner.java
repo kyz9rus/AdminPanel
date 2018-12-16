@@ -13,7 +13,6 @@ public class Banner {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="banner_seq")
     @SequenceGenerator(name="banner_seq", sequenceName="SEQ_BANNER", allocationSize=1)
-//    @Column(name = "banner_id", nullable = false)
     @Column(name = "banner_id")
     private Long id;
     @NotNull

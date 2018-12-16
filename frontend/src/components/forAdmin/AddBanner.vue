@@ -1,53 +1,51 @@
 <template>
-    <div class="addBanner">
-        <div class="submitform">
-            <h1 class="nameOperation">Add Banner</h1>
+    <div class="submitform">
+        <h1 class="nameOperation">Add Banner</h1>
 
-            <div v-if="errors.length">
-                <label class="error">Please correct the following error(s):</label>
-                <ul>
-                    <li v-for="error in errors" class="error">{{ error }}</li>
-                </ul>
+        <div v-if="errors.length">
+            <label class="error">Please correct the following error(s):</label>
+            <ul>
+                <li v-for="error in errors" class="error">{{ error }}</li>
+            </ul>
+        </div>
+
+        <div v-if="!submitted">
+            <div class="form-group">
+                <label for="imgSrc">ImgSrc</label>
+                <input type="text" class="form-control" id="imgSrc" required v-model="banner.imgSrc" name="imgSrc">
             </div>
 
-            <div v-if="!submitted">
-                <div class="form-group">
-                    <label for="imgSrc">ImgSrc</label>
-                    <input type="text" class="form-control" id="imgSrc" required v-model="banner.imgSrc" name="imgSrc">
-                </div>
-
-                <div class="form-group">
-                    <label for="width">Width</label>
-                    <input type="number" class="form-control" id="width" required v-model="banner.width" name="width">
-                </div>
-
-                <div class="form-group">
-                    <label for="height">Height</label>
-                    <input type="number" class="form-control" id="height" required v-model="banner.height" name="height">
-                </div>
-
-                <div class="form-group">
-                    <label for="targetUrl">TargetUrl</label>
-                    <input type="text" class="form-control" id="targetUrl" required v-model="banner.targetUrl" name="targetUrl">
-                </div>
-
-                <div class="form-group">
-                    <label for="langId">LangId</label>
-                    <input type="text" class="form-control" id="langId" required v-model="banner.langId" name="langId">
-                </div>
-
-                <button v-on:click="saveBanner" class="btn btn-success">Add</button>
+            <div class="form-group">
+                <label for="width">Width</label>
+                <input type="number" class="form-control" id="width" required v-model="banner.width" name="width">
             </div>
 
-            <div v-else-if="success">
-                <h4>Banner with id:{{banner.id}} has added successfully!</h4>
-                <button class="btn btn-success" v-on:click="newBannerSuccess">Back</button>
+            <div class="form-group">
+                <label for="height">Height</label>
+                <input type="number" class="form-control" id="height" required v-model="banner.height" name="height">
             </div>
 
-            <div v-else>
-                <h4>Something wrong :( Show the console log</h4>
-                <button v-on:click="newBannerError" class="btn btn-danger">Back</button>
+            <div class="form-group">
+                <label for="targetUrl">TargetUrl</label>
+                <input type="text" class="form-control" id="targetUrl" required v-model="banner.targetUrl" name="targetUrl">
             </div>
+
+            <div class="form-group">
+                <label for="langId">LangId</label>
+                <input type="text" class="form-control" id="langId" required v-model="banner.langId" name="langId">
+            </div>
+
+            <button v-on:click="saveBanner" class="btn btn-success">Add</button>
+        </div>
+
+        <div v-else-if="success">
+            <h4>Banner with id:{{banner.id}} has added successfully!</h4>
+            <button class="btn btn-success" v-on:click="newBannerSuccess">Back</button>
+        </div>
+
+        <div v-else>
+            <h4>Something wrong :( Show the console log</h4>
+            <button v-on:click="newBannerError" class="btn btn-danger">Back</button>
         </div>
     </div>
 </template>
@@ -61,10 +59,10 @@
         data() {
             return {
                 banner: {
-                    id: 0,
+                    id: null,
                     imgSrc: null,
-                    width: 0,
-                    height: 0,
+                    width: null,
+                    height: null,
                     targetUrl: null,
                     langId: null,
                 },
@@ -77,26 +75,21 @@
             saveBanner() {
                 this.errors = [];
 
-                if(!this.banner.imgSrc){
+                if(!this.banner.imgSrc)
                     this.errors.push('imgSrc is required');
-                    // this.banner.imgSrc = '';
-                }
-                if(!this.banner.width){
-                    this.errors.push('width is required and must be a number');
-                    // this.banner.width = 0;
-                }
-                if(!this.banner.height){
-                    this.errors.push('height is required and must be a number');
-                    // this.banner.height = 0;
-                }
-                if(!this.banner.targetUrl){
+
+                if(!this.banner.width || (this.banner.width < 50 || this.banner.width > 900))
+                    this.errors.push('width is required and must be a number (50 < width < 900)');
+
+                if(!this.banner.height || (this.banner.height < 50 || this.banner.height > 500))
+                    this.errors.push('height is required and must be a number (50 < height < 500)');
+
+                if(!this.banner.targetUrl)
                     this.errors.push('targetUrl is required');
-                    // this.banner.targetUrl = '';
-                }
-                if(!this.banner.langId){
+
+                if(!this.banner.langId)
                     this.errors.push('langId is required');
-                    // this.banner.langId = '';
-                }
+
 
                 if (this.errors.length !== 0)
                     return;
