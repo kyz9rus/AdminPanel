@@ -4,7 +4,7 @@
 
         <div v-if="error">
             <label class="error">Please correct the following error(s):</label>
-            <p  class="error">{{ error }}</p>
+            <p class="error">{{ error }}</p>
         </div>
 
         <div v-if="!submitted">
@@ -34,8 +34,8 @@
     export default {
         name: "DeleteBanner",
         props: ["adminName"],
-        data(){
-            return{
+        data() {
+            return {
                 banner: {
                     id: null,
                     imgSrc: null,
@@ -50,7 +50,7 @@
             }
         },
         methods: {
-            deleteBanner(){
+            deleteBanner() {
                 this.error = '';
 
                 if (!this.banner.id) {

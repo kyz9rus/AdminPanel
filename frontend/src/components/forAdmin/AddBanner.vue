@@ -27,7 +27,8 @@
 
             <div class="form-group">
                 <label for="targetUrl">TargetUrl</label>
-                <input type="text" class="form-control" id="targetUrl" required v-model="banner.targetUrl" name="targetUrl">
+                <input type="text" class="form-control" id="targetUrl" required v-model="banner.targetUrl"
+                       name="targetUrl">
             </div>
 
             <div class="form-group">
@@ -75,19 +76,19 @@
             saveBanner() {
                 this.errors = [];
 
-                if(!this.banner.imgSrc)
+                if (!this.banner.imgSrc)
                     this.errors.push('imgSrc is required');
 
-                if(!this.banner.width || (this.banner.width < 50 || this.banner.width > 900))
+                if (!this.banner.width || (this.banner.width < 50 || this.banner.width > 900))
                     this.errors.push('width is required and must be a number (50 < width < 900)');
 
-                if(!this.banner.height || (this.banner.height < 50 || this.banner.height > 500))
+                if (!this.banner.height || (this.banner.height < 50 || this.banner.height > 500))
                     this.errors.push('height is required and must be a number (50 < height < 500)');
 
-                if(!this.banner.targetUrl)
+                if (!this.banner.targetUrl)
                     this.errors.push('targetUrl is required');
 
-                if(!this.banner.langId)
+                if (!this.banner.langId)
                     this.errors.push('langId is required');
 
 
@@ -96,19 +97,19 @@
 
 
                 var data = {
-                    id:        this.banner.id,
-                    imgSrc:    this.banner.imgSrc,
-                    width:     this.banner.width,
-                    height:    this.banner.height,
+                    id: this.banner.id,
+                    imgSrc: this.banner.imgSrc,
+                    width: this.banner.width,
+                    height: this.banner.height,
                     targetUrl: this.banner.targetUrl,
-                    langId:    this.banner.langId,
+                    langId: this.banner.langId,
                 };
 
                 http
                     .post("/admin/saveBanner", data)
                     .then(response => {
 
-                        if (response.status = 'OK'){
+                        if (response.status = 'OK') {
                             this.banner.id = response.data.id;
                             this.success = true;
                         }
@@ -121,7 +122,7 @@
             },
             newBannerSuccess() {
                 this.submitted = false;
-                if (this.success = true){
+                if (this.success = true) {
                     this.success = false;
                     this.banner = {};
                     this.errors = [];
@@ -137,15 +138,17 @@
 </script>
 
 <style>
-    .nameOperation{
+    .nameOperation {
         font-size: 20px;
     }
+
     .submitform {
         width: 500px;
-        margin-left: calc((100% - 500px)/2);
+        margin-left: calc((100% - 500px) / 2);
         max-width: 500px;
     }
-    .error{
+
+    .error {
         color: red;
     }
 </style>

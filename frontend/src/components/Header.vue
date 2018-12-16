@@ -22,21 +22,21 @@
 </template>
 
 <style>
-    .header{
+    .header {
         height: 100px;
         border: 1px solid black;
     }
 
-    .name{
+    .name {
         margin: 32px auto;
         text-align: center;
     }
 
-    .loginBlock img{
+    .loginBlock img {
         width: 100%;
     }
 
-    .loginBlock button{
+    .loginBlock button {
         background: linear-gradient(180deg, grey, black);
         width: 120px;
         height: 45px;
@@ -46,7 +46,7 @@
         color: white;
     }
 
-    .mainText{
+    .mainText {
         font-size: 23px;
     }
 </style>
@@ -55,9 +55,9 @@
     import http from "../http-common";
 
     export default {
-        data(){
-            return{
-                adminName: '',
+        data() {
+            return {
+                adminName: '1',
                 buttonName: '',
                 authPath: ''
             }
@@ -71,7 +71,7 @@
 
                     console.log(response.data.login + " !!!");
 
-                    if (response.data === 'anonymousUser'){
+                    if (response.data === 'anonymousUser') {
                         console.log("anonymousUser");
 
                         this.buttonName = 'Login';

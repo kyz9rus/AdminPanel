@@ -1,6 +1,6 @@
 package ru.trainee.adminpanel.data.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,16 +28,20 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_login"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(){}
-    public User(String login){
+    public User() {
+    }
+
+    public User(String login) {
         this.login = login;
     }
-    public User(User user){
+
+    public User(User user) {
         login = user.getLogin();
         password = user.getPassword();
         roles = user.getRoles();
     }
-    public User(String login, String password){
+
+    public User(String login, String password) {
         this.login = login;
         this.password = password;
     }
@@ -51,7 +55,7 @@ public class User {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "User {login:" + login + ", password:" + password + "}";
     }
 }

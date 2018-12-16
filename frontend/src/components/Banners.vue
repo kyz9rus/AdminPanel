@@ -1,9 +1,9 @@
 <template>
     <div class="testPage">
         <div class="list row col-md-12">
-
             <div v-if="this.adminName">
-                <app-action-with-banners @action="answer = $event" :languages="languages" v-on:actionValue="getActionValue"></app-action-with-banners>
+                <app-action-with-banners @action="answer = $event" :languages="languages"
+                                     v-on:actionValue="getActionValue"></app-action-with-banners>
             </div>
 
             <div class="col-md-12 banners" align="center">
@@ -14,11 +14,12 @@
                         <div v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode}
+                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName: adminName}
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
-                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
+                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc"
+                                             @click="showBanner"/>
                                     </a>
                                 </div>
                             </router-link>
@@ -35,7 +36,8 @@
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
-                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
+                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc"
+                                             @click="showBanner"/>
                                     </a>
                                 </div>
                             </router-link>
@@ -50,8 +52,9 @@
                                         name: bannerDetailsName,
                                         params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode}}">
                                 <div align="center" class="banner">
-                                    <a :href="banner.targetUrl"  >
-                                        <img :width="'100%'" :height="banner.height" :src="banner.imgSrc" @click="showBanner"/>
+                                    <a :href="banner.targetUrl">
+                                        <img :width="'100%'" :height="banner.height" :src="banner.imgSrc"
+                                             @click="showBanner"/>
                                     </a>
                                 </div>
                             </router-link>
@@ -75,10 +78,15 @@
         data() {
             return {
                 banners: [
-                    {id: 1, width: 400, height: 100, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.lada.ru'},
-                    {id: 2, width: 200, height: 20, imgSrc: '/static/img/acura.jpg', langId: 'English', targetUrl: 'https://www.alada.ru'},
-                    {id: 3, width: 200, height: 200, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.blada.ru'},
-                    {id: 4, width: 230, height: 300, imgSrc: '/static/img/acura.jpg', langId: 'Russian', targetUrl: 'https://www.blada.ru'}
+                    {
+                        id: 1,
+                        imgSrc: '123',
+                        width: 500,
+                        height: 200,
+                        targetUrl: '123',
+                        langId: '123',
+                        adminName: '123'
+                    }
                 ],
                 languages: ['', 'Russian', 'English'],
                 show: true,
@@ -190,13 +198,15 @@
 </script>
 
 <style scoped>
-    li{
+    li {
         list-style-type: none;
     }
-    .banner{
+
+    .banner {
         margin: 10px auto;
     }
-    .banners{
+
+    .banners {
         margin-top: 20px;
     }
 </style>

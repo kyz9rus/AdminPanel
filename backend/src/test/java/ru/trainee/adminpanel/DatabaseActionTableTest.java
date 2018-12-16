@@ -38,12 +38,12 @@ public class DatabaseActionTableTest {
 
         User user = createUser();
 
-        Action action = new Action(1L, user,  "DELETE", "2018-12-16 00:00:00");
+        Action action = new Action(1L, user, "DELETE", "2018-12-16 00:00:00");
         actionRepository.save(action);
 
         int currentSize = actionRepository.findAll().size();
 
-        assertThat(currentSize, is(initialSize+1));
+        assertThat(currentSize, is(initialSize + 1));
     }
 
     @Test

@@ -2,19 +2,16 @@
     <div class="wrapperForFooter">
         <app-header :greeting="greeting" :backPage="backPage" :action="pathTo"></app-header>
 
-            <div class="content">
-                <app-banners :bannerDetailsName="pathToBannerDetails" :simplifiedMode="simplifiedMode"></app-banners>
-
-                <br/>
-
-                </div>
+        <div class="content">
+            <app-banners :bannerDetailsName="pathToBannerDetails" :simplifiedMode="simplifiedMode"></app-banners>
+        </div>
 
         <app-footer></app-footer>
     </div>
 </template>
 
 <script>
-export default {
+    export default {
         name: "index",
         data() {
             return {

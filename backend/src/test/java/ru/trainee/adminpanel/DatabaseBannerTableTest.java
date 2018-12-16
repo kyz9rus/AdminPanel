@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,7 +24,6 @@ import static org.hamcrest.Matchers.is;
 @AutoConfigureMockMvc
 @TestPropertySource("/application-test.properties")
 @Sql("/script-before-running-banner.sql")
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class DatabaseBannerTableTest {
 
     @Autowired
@@ -33,14 +31,14 @@ public class DatabaseBannerTableTest {
 
     @Test
     public void FindAllOperationTest() throws Exception {
+
         List<Banner> banners = bannerRepository.findAll();
 
-        for (Banner banner : banners)
+        for (Banner banner : banners) {
             System.out.println(banner);
+        }
 
         int size = bannerRepository.findAll().size();
-
-        System.out.println(size);
 
         assertThat(size, is(6));
     }
@@ -72,6 +70,7 @@ public class DatabaseBannerTableTest {
         assertThat(resultBanner.get().getLangId(), equalTo(newLanguageId));
     }
 
+    //    @Sql(value = {"/script-before-running-banner.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Test
     public void DeleteOperationTest() throws Exception {
         bannerRepository.deleteById(6L);

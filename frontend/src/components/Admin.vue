@@ -1,35 +1,41 @@
 <template>
     <div class="wrapperForFooter">
-        <app-header :greeting="greeting" :backPage="backPage" :action="pathTo" @adminName="adminName = $event"></app-header>
+        <app-header :greeting="greeting" :backPage="backPage" :action="pathTo"
+                    @adminName="adminName = $event"></app-header>
 
-        <button class="menuButton" @click="show = !show">
+        <button class="menuButton" @click="showPanel = !showPanel">
             <ion-icon class="ion-navicon" name="menu"></ion-icon>
         </button>
 
-        <hr/>
+        <br/>
 
         <transition name="slide">
-            <aside v-show="show" >
+            <aside v-show="showPanel">
                 <ul class="buttons">
                     <router-link :to="{name: 'add-banner', params: { adminName: adminName }}">
-                        <input type="button" class="btn" value="Add banner" @click="showOperation('app-addBanner')"/>
-                        <!--<input type="button" class="btn" value="Add banner"/>-->
-                    </router-link><br/>
+                        <input type="button" class="btn" value="Add banner" @click="showPanel = false"/>
+                    </router-link>
+                    <br/>
 
                     <router-link :to="{name: 'edit-banner', params: { adminName: adminName }}">
-                        <input type="button" class="btn" value="Edit banner" @click="showOperation('app-editBanner')"/>
-                    </router-link><br/>
+                        <input type="button" class="btn" value="Edit banner" @click="showPanel = false"/>
+                    </router-link>
+                    <br/>
 
                     <router-link :to="{name: 'delete-banner', params: { adminName: adminName }}">
-                        <input type="button" class="btn" value="Delete banner" @click="showOperation('app-deleteBanner')"/>
-                    </router-link><br/>
+                        <input type="button" class="btn" value="Delete banner" @click="showPanel = false"/>
+                    </router-link>
+                    <br/>
 
                     <router-link :to="{name: 'banner-changes'}">
-                        <input type="button" class="btn" value="See banner change history" @click="showOperation('app-log')"/>
-                    </router-link><br/>
+                        <input type="button" class="btn" value="See banner change history" @click="showPanel = false"/>
+                    </router-link>
+                    <br/>
 
-                    <router-link :to="{name: 'test-page', params: { adminName: adminName, bannerDetailsName: pathToBannerDetails}}">
-                        <input type="button" class="btn" value="Open test page to view banners" @click="showOperation('app-banners')"/>
+                    <router-link
+                            :to="{name: 'test-page', params: { adminName: adminName, bannerDetailsName: pathToBannerDetails}}">
+                        <input type="button" class="btn" value="Open test page to view banners"
+                               @click="showPanel = false"/>
                     </router-link>
                 </ul>
             </aside>
@@ -37,24 +43,19 @@
 
         <div class="content">
             <router-view></router-view>
-            <!--<app-add-banner :adminName="adminName"></app-add-banner>-->
-            <!--<app-edit-banner :adminName="adminName"></app-edit-banner>-->
-            <!--<app-delete-banner :adminName="adminName"></app-delete-banner>-->
-            <!--<app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails" :allowScale="allowScale"></app-banners>-->
-            <!--<app-log></app-log>-->
-
         </div>
+
         <app-footer></app-footer>
     </div>
 </template>
 
 <script>
     export default {
-        data(){
+        data() {
             return {
                 pathToBannerDetails: 'banner-details-admin',
-                show: false,
-                adminName: '',
+                showPanel: false,
+                adminName: '123',
                 backPage: 'Main page',
                 pathTo: '/',
                 greeting: 'Welcome to the Admin Page!',
@@ -62,19 +63,7 @@
             }
         },
         name: "admin",
-        methods: {
-            showOperation(operation){
-                this.show = false;
-
-                switch (operation) {
-                    case "app-addBanner":        $('.addBanner').show(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); $('.testPage').hide(); break;
-                    case "app-editBanner":       $('.addBanner').hide(); $('.editBanner').show(); $('.deleteBanner').hide(); $('.log').hide(); $('.testPage').hide(); break;
-                    case "app-deleteBanner":     $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').show(); $('.log').hide(); $('.testPage').hide(); break;
-                    case "app-log":              $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').show(); $('.testPage').hide(); break;
-                    case "app-banners":          $('.addBanner').hide(); $('.editBanner').hide(); $('.deleteBanner').hide(); $('.log').hide(); $('.testPage').show(); break;
-                }
-            }
-        }
+        methods: {}
     };
 
 </script>
@@ -92,13 +81,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
-    aside h2{
+
+    aside h2 {
         font-weight: 300;
         color: #afafaf;
         transition: 1s;
     }
+
     button {
         background: transparent;
         border: 0;
@@ -111,25 +102,23 @@
         border-radius: 50%;
         transition: all .3s ease-in-out;
     }
+
     button:active {
-        background-color: rgba(0,0,0,0.1);
+        background-color: rgba(0, 0, 0, 0.1);
     }
-    .buttons{
+
+    .buttons {
         position: fixed;
         top: 167px;
         margin-left: -40px;
     }
-    .buttons input{
+
+    .buttons input {
         font-size: 13px;
         margin: 14px auto;
     }
-    .menuButton{
+
+    .menuButton {
         margin-top: 10px;
-    }
-    .addBanner, .editBanner, .deleteBanner, .log{
-        display: none;
-    }
-    li{
-        list-style-type: none;
     }
 </style>

@@ -19,7 +19,7 @@ mvn install
 
 # In first, some files from frontend directory will be moved
 # to backend part; after that the application will run!
-maven --projects backend spring-boot:run
+mvn --projects backend spring-boot:run
 
 # To run all tests use
 mvn test

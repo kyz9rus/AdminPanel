@@ -62,8 +62,8 @@
     export default {
         name: "EditBanner",
         props: ["adminName"],
-        data (){
-            return{
+        data() {
+            return {
                 banner: {
                     id: null,
                     imgSrc: null,
@@ -95,18 +95,18 @@
                     return;
 
                 var data = {
-                    id:        this.banner.id,
-                    imgSrc:    this.banner.imgSrc,
-                    width:     this.banner.width,
-                    height:    this.banner.height,
+                    id: this.banner.id,
+                    imgSrc: this.banner.imgSrc,
+                    width: this.banner.width,
+                    height: this.banner.height,
                     targetUrl: this.banner.targetUrl,
-                    langId:    this.banner.langId,
+                    langId: this.banner.langId,
                 };
 
                 http
                     .put("/admin/editBanner", data)
                     .then(response => {
-                        if (response.status = 'OK'){
+                        if (response.status = 'OK') {
                             this.banner.id = response.data.id;
                             this.success = true;
                         }

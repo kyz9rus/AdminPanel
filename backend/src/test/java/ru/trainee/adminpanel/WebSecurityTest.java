@@ -13,7 +13,6 @@ import ru.trainee.adminpanel.data.repository.UserRepository;
 
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 @RunWith(SpringRunner.class)
@@ -30,14 +29,12 @@ public class WebSecurityTest {
     @Test
     public void redirectToLoginTest() throws Exception {
         this.mockMvc.perform(get("/admin"))
-                .andDo(print())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
 
     @Test
     public void redirectToLoginTest2() throws Exception {
         this.mockMvc.perform(get("/api/admin/addBanner"))
-                .andDo(print())
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
 
@@ -47,7 +44,6 @@ public class WebSecurityTest {
         userRepository.save(new User("Danya", "$2a$10$7YDSJT6rsDN6Yc1CacLejetQCeFo8VH7sGMJfNE57gSUAbW5LmOwe"));
 
         this.mockMvc.perform(get("/admin"))
-                .andDo(print())
                 .andExpect(authenticated());
     }
 }

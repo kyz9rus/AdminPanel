@@ -15,13 +15,13 @@
 <script>
     export default {
         name: "ActionWithBanners",
-        data(){
-            return{
+        data() {
+            return {
                 sortValue: ''
             }
         },
-        methods:{
-            sendData(){
+        methods: {
+            sendData() {
                 this.$emit('actionValue', this.sortValue);
             }
         }

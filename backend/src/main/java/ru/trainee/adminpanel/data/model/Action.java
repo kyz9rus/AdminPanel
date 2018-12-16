@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 public class Action {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="action_seq")
-    @SequenceGenerator(name="action_seq", sequenceName="SEQ_ACTION", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "action_seq")
+    @SequenceGenerator(name = "action_seq", sequenceName = "SEQ_ACTION", allocationSize = 1)
     private Long id;
 
     @NotNull
@@ -19,19 +19,20 @@ public class Action {
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="username")
+    @JoinColumn(name = "username")
     private User user;
 
     @NotNull
-    @Column(name="actionname")
+    @Column(name = "actionname")
     private String actionName;
     @NotNull
-    @Column(name="actiontime")
+    @Column(name = "actiontime")
     private String actionTime;
 
-    public Action(){}
+    public Action() {
+    }
 
-    public Action(Long banner_id, User user, String actionName, String actionTime){
+    public Action(Long banner_id, User user, String actionName, String actionTime) {
         this.banner_id = banner_id;
         this.user = user;
         this.actionName = actionName;
@@ -39,7 +40,7 @@ public class Action {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Action {id:" + id + ", banner_id:" + banner_id + ", userName:" + user.getLogin() + ", actionName:" + actionName + ", actionTime:" + actionTime + "}";
     }
 }

@@ -35,8 +35,8 @@
 
     export default {
         name: "Log",
-        data (){
-            return{
+        data() {
+            return {
                 actions: [],
                 textButton: 'Show',
                 submitted: false,
@@ -45,7 +45,7 @@
             }
         },
         methods: {
-            showLog(){
+            showLog() {
                 if (this.textButton === 'Show') {
                     http
                         .get("/admin/getAllActions")
@@ -70,7 +70,7 @@
 
                     this.submitted = true;
                 }
-                else{
+                else {
                     this.showTable = false;
                     this.textButton = 'Show';
                 }
@@ -81,10 +81,11 @@
 </script>
 
 <style scoped>
-    #submitLogBut{
+    #submitLogBut {
         margin-left: 30%;
     }
-    .logTable{
+
+    .logTable {
         border: 1px solid black;
         margin-top: 50px;
         width: 90%;
@@ -92,7 +93,7 @@
         text-align: center;
     }
 
-    tr:first-child{
+    tr:first-child {
         font-weight: bold;
         font-size: 18px;
     }

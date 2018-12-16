@@ -16,7 +16,8 @@ import ru.trainee.adminpanel.data.repository.UserRepository;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,7 +30,7 @@ public class DatabaseUserTableTest {
     private UserRepository userRepository;
 
     @Test
-    public void T1_checkAddUser(){
+    public void T1_checkAddUser() {
         User user = new User("Danya", "password");
         User resultUser = userRepository.save(user);
 
@@ -39,7 +40,7 @@ public class DatabaseUserTableTest {
     }
 
     @Test
-    public void T2_checkFyndById (){
+    public void T2_checkFyndById() {
         User user = new User("Danya");
         Optional<User> resultUser = userRepository.findById(user.getLogin());
 

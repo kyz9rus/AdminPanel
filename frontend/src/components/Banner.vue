@@ -26,9 +26,10 @@
 
     export default {
         name: "banner",
-        props: ["banner", "simplifiedMode"],
-        data(){
-            return{
+        adminName: '1',
+        props: ["banner", "simplifiedMode", "adminName"],
+        data() {
+            return {
                 show: true
             }
         },
@@ -41,17 +42,17 @@
 </script>
 
 <style scoped>
-    .descBanner{
+    .descBanner {
         position: fixed;
         left: 40%;
         top: 12%;
         border: 1px solid black;
         border-radius: 18px;
         width: 300px;
-        background: rgba(255,255,255,0.8);
+        background: rgba(255, 255, 255, 0.8);
     }
 
-    .descBanner h4{
+    .descBanner h4 {
         float: left;
         margin-left: 100px;
     }
