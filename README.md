@@ -2,17 +2,27 @@
 
 ## Build Setup
 
+Перед запуском приложения необходим создать схему базы данных, настройки подключения заданы в файле backend/src/main/resources/application.properties
+
+После создания базы данных рекомендуется запустить sql скрипты из файла backend/src/main/resources/sql-sctipts.sql
 ``` bash
-# install dependencies
-npm install
+# Commands run in root directory (AdminPanel)
 
-# serve with hot reload at localhost:8080
-npm run dev
+# After running the command node,  
+# npm and all project dependency will be installed.
+# Also frontend part of project will build
+# To ignore tests run
+maven install -Dmaven.test.skip=true
 
-# build for production with minification
-npm run build
+# Without ignore tests
+maven install
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# In first, some files from frontend directory will be moved
+# to backend part; after that the application will run!
+maven --projects backend spring-boot:run
 
+# To run all tests use
+maven test
 ```
+
+После запуска приложения будет прослушиваться порт 8080. Изменить порт можно в файле frontend/src/http-common.js

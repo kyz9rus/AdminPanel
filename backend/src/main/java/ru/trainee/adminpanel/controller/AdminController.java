@@ -1,4 +1,4 @@
-package ru.trainee.adminpanel.controllers;
+package ru.trainee.adminpanel.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

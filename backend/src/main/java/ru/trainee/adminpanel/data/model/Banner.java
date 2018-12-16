@@ -7,11 +7,13 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@Table(name="banner")
 public class Banner {
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="banner_seq")
     @SequenceGenerator(name="banner_seq", sequenceName="SEQ_BANNER", allocationSize=1)
+//    @Column(name = "banner_id", nullable = false)
     @Column(name = "banner_id")
     private Long id;
     @NotNull
@@ -32,6 +34,14 @@ public class Banner {
 
     public Banner(Long id, String imgSrc, int width, int height, String targetUrl, String langId) {
         this.id = id;
+        this.imgSrc = imgSrc;
+        this.width = width;
+        this.height = height;
+        this.targetUrl = targetUrl;
+        this.langId = langId;
+    }
+
+    public Banner(String imgSrc, int width, int height, String targetUrl, String langId) {
         this.imgSrc = imgSrc;
         this.width = width;
         this.height = height;

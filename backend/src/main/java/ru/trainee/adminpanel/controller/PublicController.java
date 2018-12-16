@@ -1,4 +1,4 @@
-package ru.trainee.adminpanel.controllers;
+package ru.trainee.adminpanel.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -29,5 +29,4 @@ public class PublicController {
 
         return authentication.getPrincipal();
     }
-
 }

@@ -75,22 +75,31 @@
         },
         methods: {
             saveBanner() {
-                if(!this.banner.imgSrc)
+                if(!this.banner.imgSrc){
                     this.errors.push('imgSrc is required');
+                    // this.banner.imgSrc = '';
+                }
                 if(!this.banner.width){
                     this.errors.push('width is required');
-                    this.banner.width = null
+                    // this.banner.width = 0;
                 }
-                if(!this.banner.height)
+                if(!this.banner.height){
                     this.errors.push('height is required');
-                if(!this.banner.targetUrl)
+                    // this.banner.height = 0;
+                }
+                if(!this.banner.targetUrl){
                     this.errors.push('targetUrl is required');
-                if(!this.banner.langId)
+                    // this.banner.targetUrl = '';
+                }
+                if(!this.banner.langId){
                     this.errors.push('langId is required');
+                    // this.banner.langId = '';
+                }
 
                 if (this.errors.length !== 0){
                     this.newBanner();
-                    e.preventDefault();
+                    return;
+                    // e.preventDefault();
                 }
 
                 var data = {
@@ -105,7 +114,6 @@
                 http
                     .post("/admin/saveBanner", data)
                     .then(response => {
-                        console.log(response.data);
 
                         if (response.status = 'OK'){
                             this.banner.id = response.data.id;

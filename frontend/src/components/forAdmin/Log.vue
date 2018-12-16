@@ -17,7 +17,7 @@
                 <tr v-for="(action, index) in actions" :key="index">
                     <td>{{ action.id }}</td>
                     <td>{{ action.banner_id }}</td>
-                    <td>{{ action.user }}</td>
+                    <td>{{ action.user.login }}</td>
                     <td>{{ action.actionName }}</td>
                     <td>{{ action.actionTime }}</td>
                 </tr>
@@ -52,7 +52,10 @@
                         .then(response => {
                             if (response.status = 'OK') {
                                 this.actions = response.data;
-                                this.actions[0].user = response.data[0].user.login;
+
+                                response.data.map(user => {
+                                    this.actions.user = user.login;
+                                });
 
                                 this.success = true;
                                 this.textButton = 'Hide';

@@ -16,4 +16,5 @@ class Role {
     private int roleId;
     @NotNull
     private String role;
+
 }

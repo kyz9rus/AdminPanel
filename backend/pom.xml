@@ -34,11 +34,6 @@
         </dependency>
 
         <!--For database-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-
         <!--JPA-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,6 +74,7 @@
         </dependency>
 
         <!--In-memory database-->
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -117,6 +113,17 @@
                                     </includes>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>mvn test</id>
+                        <!--<goals>-->
+                            <!--<goal>test</goal>-->
+                        <!--</goals>-->
+                        <phase>test</phase>
+                        <configuration>
+                            <arguments>mvn test</arguments>
                         </configuration>
                     </execution>
                 </executions>

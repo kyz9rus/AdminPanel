@@ -11,11 +11,9 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "login")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String login;
     @NotNull
     @JsonIgnore

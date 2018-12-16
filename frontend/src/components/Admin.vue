@@ -24,7 +24,7 @@
             <app-add-banner :adminName="adminName"></app-add-banner>
             <app-edit-banner :adminName="adminName"></app-edit-banner>
             <app-delete-banner :adminName="adminName"></app-delete-banner>
-            <app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails"></app-banners>
+            <app-banners :adminName="adminName" :bannerDetailsName="pathToBannerDetails" :allowScale="allowScale"></app-banners>
             <app-log></app-log>
 
         </div>
@@ -41,7 +41,8 @@
                 adminName: '',
                 backPage: 'Main page',
                 pathTo: '/',
-                greeting: 'Welcome to the Admin Page!'
+                greeting: 'Welcome to the Admin Page!',
+                allowScale: false
             }
         },
         name: "admin",
