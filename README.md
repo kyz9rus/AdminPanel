@@ -2,27 +2,31 @@
 
 ## Build Setup
 
-Перед запуском приложения необходим создать схему базы данных, настройки подключения заданы в файле backend/src/main/resources/application.properties
+Перед запуском приложения необходимо создать базу данных, настройки подключения задаются в файле backend/src/main/resources/application.properties
 
-После создания базы данных рекомендуется запустить sql скрипты из файла backend/src/main/resources/sql-sctipts.sql
+Все сущности hibernate создаст сам
 ``` bash
-# Commands run in root directory (AdminPanel)
+# Следующие команды запускаются в корневой директории (AdminPanel)
 
-# After running the command node,  
-# npm and all project dependency will be installed.
-# Also frontend part of project will build
-# To ignore tests run
+№ Данная команда при необходимости установит node, npm и все 
+№ необходимые для запуска приложения зависимости.
+№ Также произойдет сборка фронтенд части приложения и проигнорируется
+№ запуск тестов
 mvn install -Dmaven.test.skip=true
 
-# Without ignore tests
+# Без игнорирования тестов
 mvn install
 
-# In first, some files from frontend directory will be moved
-# to backend part; after that the application will run!
+
+№ Команда запуска приложения. 
 mvn --projects backend spring-boot:run
 
-# To run all tests use
+# Команда запуска тестов
 mvn test
 ```
+После запуска приложения рекомендуется запустить sql скрипты из файла backend/src/main/resources/sql-sctipts.sql
 
-После запуска приложения будет прослушиваться порт 8080. Изменить порт можно в файле frontend/src/http-common.js
+При завершении выполнения команды mvn run будет прослушиваться порт 8080. Изменить порт можно в файле frontend/src/http-common.js
+
+Обратите внимание, что в файле application.properties установлен флаг: spring.jpa.hibernate.ddl-auto=create. 
+Замените его при надобоности. 
