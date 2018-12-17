@@ -77,3 +77,19 @@
         }
     };
 </script>
+
+<style scoped>
+    .nameOperation {
+        font-size: 20px;
+    }
+
+    .submitform {
+        width: 500px;
+        margin-left: calc((100% - 500px) / 2);
+        max-width: 500px;
+    }
+
+    .error {
+        color: red;
+    }
+</style>

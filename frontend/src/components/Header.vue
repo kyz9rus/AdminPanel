@@ -1,7 +1,6 @@
 <template>
     <div class="header featurebox col-md-12 col-sm-12 col-xs-12">
         <div class="row" align="center">
-
             <div class="name col-md-10 col-sm-10 col-xs-10">
                 <p class="mainText">{{ greeting }}</p>
             </div>
@@ -57,7 +56,7 @@
     export default {
         data() {
             return {
-                adminName: '1',
+                adminName: '',
                 buttonName: '',
                 authPath: ''
             }

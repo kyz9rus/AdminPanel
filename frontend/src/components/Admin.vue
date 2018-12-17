@@ -55,7 +55,7 @@
             return {
                 pathToBannerDetails: 'banner-details-admin',
                 showPanel: false,
-                adminName: '123',
+                adminName: '',
                 backPage: 'Main page',
                 pathTo: '/',
                 greeting: 'Welcome to the Admin Page!',

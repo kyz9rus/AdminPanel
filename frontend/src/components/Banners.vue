@@ -13,8 +13,8 @@
                     <li v-for="banner in sortedBanners">
                         <div v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
-                                        name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName: adminName}
+                                            name: bannerDetailsName,
+                                            params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName: adminName}
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
@@ -32,7 +32,7 @@
                         <div v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode}
+                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName:adminName}
                                     }">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
@@ -50,7 +50,7 @@
                         <div v-bind:style="{width: banner.width + 'px' }">
                             <router-link :to="{
                                         name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode}}">
+                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName:adminName}}">
                                 <div align="center" class="banner">
                                     <a :href="banner.targetUrl">
                                         <img :width="'100%'" :height="banner.height" :src="banner.imgSrc"
@@ -84,9 +84,7 @@
                         width: 500,
                         height: 200,
                         targetUrl: '123',
-                        langId: '123',
-                        adminName: '123'
-                    }
+                        langId: '123',}
                 ],
                 languages: ['', 'Russian', 'English'],
                 show: true,

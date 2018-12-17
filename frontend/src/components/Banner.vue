@@ -26,7 +26,6 @@
 
     export default {
         name: "banner",
-        adminName: '1',
         props: ["banner", "simplifiedMode", "adminName"],
         data() {
             return {

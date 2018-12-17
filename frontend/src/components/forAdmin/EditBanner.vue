@@ -84,11 +84,13 @@
                 if (!this.banner.id)
                     this.errors.push('id is required and must be a number');
 
-                if (!Number(this.banner.width) || (Number(this.banner.width) <= 50 || Number(this.banner.width >= 900)))
+
+
+                if (this.banner.width !== null && (!Number(this.banner.width) || (Number(this.banner.width) <= 50 || Number(this.banner.width >= 900))))
                     this.errors.push('width and must be a number (50 < width < 900)');
 
-                if (!Number(this.banner.height) || (Number(this.banner.height) <= 50 || Number(this.banner.height >= 500)))
-                    this.errors.push('height and must be a number (50 < width < 500)');
+                if (this.banner.width !== null && (!Number(this.banner.height) || (Number(this.banner.height) <= 50 || Number(this.banner.height >= 500))))
+                    this.errors.push('height and must be a number (50 < height < 500)');
 
 
                 if (this.errors.length !== 0)
@@ -131,3 +133,19 @@
         }
     }
 </script>
+
+<style scoped>
+    .nameOperation {
+        font-size: 20px;
+    }
+
+    .submitform {
+        width: 500px;
+        margin-left: calc((100% - 500px) / 2);
+        max-width: 500px;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
