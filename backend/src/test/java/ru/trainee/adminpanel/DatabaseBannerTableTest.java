@@ -70,7 +70,6 @@ public class DatabaseBannerTableTest {
         assertThat(resultBanner.get().getLangId(), equalTo(newLanguageId));
     }
 
-    //    @Sql(value = {"/script-before-running-banner.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Test
     public void DeleteOperationTest() throws Exception {
         bannerRepository.deleteById(6L);
