@@ -12,7 +12,5 @@ public class MappingController {
     }
 
     @GetMapping("/admin")
-    public String toAdmin() {
-        return "admin.html";
-    }
+    public String toAdmin() { return "admin.html";}
 }

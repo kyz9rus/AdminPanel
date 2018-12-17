@@ -12,10 +12,10 @@
 № необходимые для запуска приложения зависимости.
 № Также произойдет сборка фронтенд части приложения и проигнорируется
 № запуск тестов
-mvn install -Dmaven.test.skip=true
+mvn clean install -Dmaven.test.skip=true
 
 # Без игнорирования тестов
-mvn install
+mvn clean install
 
 
 № Команда запуска приложения. 
