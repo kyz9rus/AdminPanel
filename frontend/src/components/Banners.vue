@@ -102,11 +102,14 @@
                         this.banners = response.data; // JSON are parsed automatically.
                         this.languages = [''];
 
-                        let uniqueLanguages = new Set();
-                        this.banners.map(banner => {
-                            uniqueLanguages.add(banner.langId);
+
+                        this.languages = this.banners.map(banner => {
+                            return banner.langId;
                         });
-                        this.languages = Array.from(uniqueLanguages);
+
+                        this.languages = [...new Set(this.languages)];
+
+
 
                     })
                     .catch(e => {

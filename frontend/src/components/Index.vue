@@ -6,7 +6,15 @@
             <app-banners :bannerDetailsName="pathToBannerDetails" :simplifiedMode="simplifiedMode"></app-banners>
         </div>
 
+        !!!
+        <router-link :to="{name: 'admin'}">
+            <div>
+                PUSH
+            </div>
+        </router-link>
+
         <app-footer></app-footer>
+        1234
     </div>
 </template>
 
@@ -19,7 +27,7 @@
                 backPage: 'Admin page',
                 pathTo: '/admin',
                 greeting: 'Welcome to the Main Page!',
-                simplifiedMode: true
+                simplifiedMode: true,
             }
         }
     };

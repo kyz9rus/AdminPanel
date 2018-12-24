@@ -67,8 +67,8 @@
                 banner: {
                     id: null,
                     imgSrc: null,
-                    width: null,
-                    height: null,
+                    width: '',
+                    height: '',
                     targetUrl: null,
                     langId: null,
                 },
@@ -84,12 +84,12 @@
                 if (!this.banner.id)
                     this.errors.push('id is required and must be a number');
 
+                console.log(this.banner.width);
 
-
-                if (this.banner.width !== null && (!Number(this.banner.width) || (Number(this.banner.width) <= 50 || Number(this.banner.width >= 900))))
+                if (this.banner.width !== '' && (!Number(this.banner.width) || (Number(this.banner.width) <= 50 || Number(this.banner.width >= 900))))
                     this.errors.push('width and must be a number (50 < width < 900)');
 
-                if (this.banner.width !== null && (!Number(this.banner.height) || (Number(this.banner.height) <= 50 || Number(this.banner.height >= 500))))
+                if (this.banner.height !== '' && (!Number(this.banner.height) || (Number(this.banner.height) <= 50 || Number(this.banner.height >= 500))))
                     this.errors.push('height and must be a number (50 < height < 500)');
 
 
