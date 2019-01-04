@@ -29,7 +29,7 @@ export default new Router({
             ]
         },
         {
-            path: '/api/admin',
+            path: '/admin',
             name: 'admin',
             component: Admin,
             children: [

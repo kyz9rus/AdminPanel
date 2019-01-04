@@ -9,58 +9,63 @@
             <div class="col-md-12 banners" align="center">
                 <h4>Banners List:</h4>
 
-                <ul v-if="answer === 'Sort'">
-                    <li v-for="banner in sortedBanners">
-                        <div v-bind:style="{width: banner.width + 'px' }">
-                            <router-link :to="{
+                <div v-if="list.length > 0">
+                    <ul v-if="answer === 'Sort'">
+                        <li v-for="banner in sortedBanners">
+                            <div v-bind:style="{width: banner.width + 'px' }">
+                                <router-link :to="{
+                                                name: bannerDetailsName,
+                                                params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName: adminName}
+                                        }">
+                                    <div align="center" class="banner">
+                                        <a :href="banner.targetUrl">
+                                            <img :width="banner.width" :height="banner.height" :src="banner.imgSrc"
+                                                 @click="showBanner"/>
+                                        </a>
+                                    </div>
+                                </router-link>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul v-else-if="answer === 'Group'">
+                        <li v-for="banner in groupedBanners">
+                            <div v-bind:style="{width: banner.width + 'px' }">
+                                <router-link :to="{
                                             name: bannerDetailsName,
-                                            params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName: adminName}
-                                    }">
-                                <div align="center" class="banner">
-                                    <a :href="banner.targetUrl">
-                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc"
-                                             @click="showBanner"/>
-                                    </a>
-                                </div>
-                            </router-link>
-                        </div>
-                    </li>
-                </ul>
+                                            params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName:adminName}
+                                        }">
+                                    <div align="center" class="banner">
+                                        <a :href="banner.targetUrl">
+                                            <img :width="banner.width" :height="banner.height" :src="banner.imgSrc"
+                                                 @click="showBanner"/>
+                                        </a>
+                                    </div>
+                                </router-link>
+                            </div>
+                        </li>
+                    </ul>
 
-                <ul v-else-if="answer === 'Group'">
-                    <li v-for="banner in groupedBanners">
-                        <div v-bind:style="{width: banner.width + 'px' }">
-                            <router-link :to="{
-                                        name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName:adminName}
-                                    }">
-                                <div align="center" class="banner">
-                                    <a :href="banner.targetUrl">
-                                        <img :width="banner.width" :height="banner.height" :src="banner.imgSrc"
-                                             @click="showBanner"/>
-                                    </a>
-                                </div>
-                            </router-link>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul v-else>
-                    <li v-for="banner in banners">
-                        <div v-bind:style="{width: banner.width + 'px' }">
-                            <router-link :to="{
-                                        name: bannerDetailsName,
-                                        params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName:adminName}}">
-                                <div align="center" class="banner">
-                                    <a :href="banner.targetUrl">
-                                        <img :width="'100%'" :height="banner.height" :src="banner.imgSrc"
-                                             @click="showBanner"/>
-                                    </a>
-                                </div>
-                            </router-link>
-                        </div>
-                    </li>
-                </ul>
+                    <ul v-else>
+                        <li v-for="banner in banners">
+                            <div v-bind:style="{width: banner.width + 'px' }">
+                                <router-link :to="{
+                                            name: bannerDetailsName,
+                                            params: { banner: banner, id: banner.id, simplifiedMode: simplifiedMode, adminName:adminName}}">
+                                    <div align="center" class="banner">
+                                        <a :href="banner.targetUrl">
+                                            <img :width="'100%'" :height="banner.height" :src="banner.imgSrc"
+                                                 @click="showBanner"/>
+                                        </a>
+                                    </div>
+                                </router-link>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div v-else>
+                    <h2>Empty list</h2>
+                </div>
             </div>
             <div>
                 <router-view @refreshData="refreshList"></router-view>

@@ -6,15 +6,7 @@
             <app-banners :bannerDetailsName="pathToBannerDetails" :simplifiedMode="simplifiedMode"></app-banners>
         </div>
 
-        !!!
-        <router-link :to="{name: 'admin'}">
-            <div>
-                PUSH
-            </div>
-        </router-link>
-
         <app-footer></app-footer>
-        1234
     </div>
 </template>
 
