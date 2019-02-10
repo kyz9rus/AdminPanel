@@ -13,7 +13,7 @@
                 <input type="number" class="form-control" id="id" required v-model="banner.id" name="id">
             </div>
 
-            <button v-on:click="deleteBanner" class="btn btn-success">Dekete</button>
+            <button v-on:click="deleteBanner" class="btn btn-success">Delete</button>
         </div>
 
         <div v-else-if="success">

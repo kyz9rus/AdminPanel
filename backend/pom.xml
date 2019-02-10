@@ -78,6 +78,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!--AOP in Spring-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

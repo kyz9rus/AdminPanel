@@ -1,13 +1,10 @@
 package ru.trainee.adminpanel.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.trainee.adminpanel.data.model.Action;
 import ru.trainee.adminpanel.data.model.Banner;
 import ru.trainee.adminpanel.data.model.User;
-import ru.trainee.adminpanel.data.repository.ActionRepository;
 import ru.trainee.adminpanel.data.repository.BannerRepository;
 
 import java.text.SimpleDateFormat;
@@ -18,14 +15,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class BannerService {
-
     private final BannerRepository bannerRepository;
-    private final ActionRepository actionRepository;
+
+    private final ActionService actionService;
 
     public Optional<Banner> saveBanner(Banner banner) {
-        User admin = getUserFromAuthentication();
-
-        System.out.println("Add new banner: " + banner + " by " + admin.getLogin() + "...");
+        Authentication authentication = new Authentication();
+        User admin = authentication.getUserFromAuthentication();
 
         Optional<Banner> resultBanner;
         try {
@@ -37,49 +33,25 @@ public class BannerService {
         }
 
         Action action = new Action(resultBanner.get().getId(), admin, "ADD", getCurrentDate());
-        System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
-
         try {
-            actionRepository.save(action);
+            actionService.saveAction(action);
         } catch (Exception e) {
             e.printStackTrace();
 
-            bannerRepository.deleteById(banner.getId());
+            bannerRepository.deleteById(resultBanner.get().getId());
             resultBanner = Optional.empty();
         }
 
         return resultBanner;
     }
 
-    public boolean deleteBanner(Long id_banner) {
-        User admin = getUserFromAuthentication();
-
-        try {
-            System.out.println("Delete banner with id:" + id_banner + " by " + admin.getLogin() + "...");
-
-            bannerRepository.deleteById(id_banner);
-
-            Action action = new Action(id_banner, admin, "DELETE", getCurrentDate());
-            System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
-
-            actionRepository.save(action);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            return false;
-        }
-
-        return true;
-    }
-
     public Optional<Banner> editBanner(Banner banner) {
-        User admin = getUserFromAuthentication();
+        Authentication authentication = new Authentication();
+        User admin = authentication.getUserFromAuthentication();
 
         Optional<Banner> resultBanner = Optional.empty();
 
         try {
-            System.out.println("Update banner: " + banner + " by " + admin.getLogin() + "...");
-
             Optional<Banner> bannerFromDb = bannerRepository.findById(banner.getId());
 
             if (bannerFromDb.isPresent()) {
@@ -88,15 +60,34 @@ public class BannerService {
             }
 
             Action action = new Action(resultBanner.get().getId(), admin, "EDIT", getCurrentDate());
-            System.out.println("Add action: " + action + " by " + admin.getLogin() + "...\n");
 
-            actionRepository.save(action);
+            actionService.saveAction(action);
         } catch (Exception e) {
             e.printStackTrace();
+
             resultBanner = Optional.empty();
         }
 
         return resultBanner;
+    }
+
+    public boolean deleteBanner(Long bannerId) {
+        Authentication authentication = new Authentication();
+        User admin = authentication.getUserFromAuthentication();
+
+        try {
+            bannerRepository.deleteById(bannerId);
+
+            Action action = new Action(bannerId, admin, "DELETE", getCurrentDate());
+
+            actionService.saveAction(action);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return false;
+        }
+
+        return true;
     }
 
     private Banner checkBanner(Banner bannerFromDb, Banner bannerFromForm) {
@@ -122,28 +113,7 @@ public class BannerService {
         return bannerRepository.findAll();
     }
 
-    public List<Action> getAllActions() {
-        return actionRepository.findAll();
-    }
-
-    public User getUserFromAuthentication() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = null;
-
-        try {
-            if (!authentication.getName().equals("anonymousUser"))
-                user = (User) authentication.getPrincipal();
-            else
-                user = new User();
-
-        } catch (NullPointerException e) {
-            System.out.println("There is no authentication user yet.");
-        }
-
-        return user;
-    }
-
-    public String getCurrentDate() {
+    String getCurrentDate() {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date currentDate = new Date();
 

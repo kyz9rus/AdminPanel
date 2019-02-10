@@ -66,7 +66,7 @@
             http
                 .get('/getAuthority')
                 .then((response) => {
-                    console.log(response.data);
+                    // console.log(response.data);
 
                     console.log(response.data.login + " !!!");
 

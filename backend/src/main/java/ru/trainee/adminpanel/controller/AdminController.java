@@ -6,11 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.trainee.adminpanel.data.model.Action;
 import ru.trainee.adminpanel.data.model.Banner;
+import ru.trainee.adminpanel.service.ActionService;
 import ru.trainee.adminpanel.service.BannerService;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @RequestMapping("/api/admin")
 @RestController
@@ -18,6 +18,7 @@ import java.util.Optional;
 public class AdminController {
 
     private final BannerService bannerService;
+    private final ActionService actionService;
 
     @PostMapping("/saveBanner")
     public ResponseEntity<Banner> saveBanner(@RequestBody Banner banner) {
@@ -52,7 +53,7 @@ public class AdminController {
 
     @GetMapping("/getAllActions")
     public ResponseEntity<List<Action>> getAllActions() {
-        List<Action> actions = bannerService.getAllActions();
+        List<Action> actions = actionService.getAllActions();
 
         if (!actions.isEmpty())
             return new ResponseEntity<>(actions, HttpStatus.OK);
