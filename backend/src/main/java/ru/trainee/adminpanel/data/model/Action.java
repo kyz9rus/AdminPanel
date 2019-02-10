@@ -1,12 +1,17 @@
 package ru.trainee.adminpanel.data.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import ru.trainee.adminpanel.utils.ActionType;
+import ru.trainee.adminpanel.utils.PostgreSQLEnumType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
+@TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
 public class Action {
 
     @Id
@@ -22,9 +27,12 @@ public class Action {
     @JoinColumn(name = "username")
     private User user;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "actionname", columnDefinition = "actionname")
+    @Type(type = "pgsql_enum")
     @NotNull
-    @Column(name = "actionname")
-    private String actionName;
+    private ActionType actionName;
+
     @NotNull
     @Column(name = "actiontime")
     private String actionTime;
@@ -32,7 +40,7 @@ public class Action {
     public Action() {
     }
 
-    public Action(Long banner_id, User user, String actionName, String actionTime) {
+    public Action(Long banner_id, User user, ActionType actionName, String actionTime) {
         this.banner_id = banner_id;
         this.user = user;
         this.actionName = actionName;

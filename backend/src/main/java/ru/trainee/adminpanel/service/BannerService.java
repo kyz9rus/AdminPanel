@@ -1,11 +1,13 @@
 package ru.trainee.adminpanel.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.trainee.adminpanel.data.model.Action;
 import ru.trainee.adminpanel.data.model.Banner;
 import ru.trainee.adminpanel.data.model.User;
 import ru.trainee.adminpanel.data.repository.BannerRepository;
+import ru.trainee.adminpanel.utils.ActionType;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,7 +34,7 @@ public class BannerService {
             resultBanner = Optional.empty();
         }
 
-        Action action = new Action(resultBanner.get().getId(), admin, "ADD", getCurrentDate());
+        Action action = new Action(resultBanner.get().getId(), admin, ActionType.ADD, getCurrentDate());
         try {
             actionService.saveAction(action);
         } catch (Exception e) {
@@ -59,7 +61,7 @@ public class BannerService {
                 bannerRepository.save(resultBanner.get());
             }
 
-            Action action = new Action(resultBanner.get().getId(), admin, "EDIT", getCurrentDate());
+            Action action = new Action(resultBanner.get().getId(), admin, ActionType.EDIT, getCurrentDate());
 
             actionService.saveAction(action);
         } catch (Exception e) {
@@ -76,9 +78,17 @@ public class BannerService {
         User admin = authentication.getUserFromAuthentication();
 
         try {
+            bannerRepository.findById(bannerId);
+        } catch (EmptyResultDataAccessException e1) {
+            e1.printStackTrace();
+
+            return false;
+        }
+
+        try {
             bannerRepository.deleteById(bannerId);
 
-            Action action = new Action(bannerId, admin, "DELETE", getCurrentDate());
+            Action action = new Action(bannerId, admin, ActionType.DELETE, getCurrentDate());
 
             actionService.saveAction(action);
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-package ru.trainee.adminpanel.aspect;
+package ru.trainee.adminpanel.aspects;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
