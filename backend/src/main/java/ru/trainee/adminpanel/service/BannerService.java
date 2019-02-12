@@ -7,11 +7,12 @@ import ru.trainee.adminpanel.data.model.Action;
 import ru.trainee.adminpanel.data.model.Banner;
 import ru.trainee.adminpanel.data.model.User;
 import ru.trainee.adminpanel.data.repository.BannerRepository;
-import ru.trainee.adminpanel.utils.ActionType;
+import ru.trainee.adminpanel.data.model.ActionType;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -51,7 +52,7 @@ public class BannerService {
         Authentication authentication = new Authentication();
         User admin = authentication.getUserFromAuthentication();
 
-        Optional<Banner> resultBanner = Optional.empty();
+        Optional<Banner> resultBanner;
 
         try {
             Optional<Banner> bannerFromDb = bannerRepository.findById(banner.getId());
@@ -59,7 +60,8 @@ public class BannerService {
             if (bannerFromDb.isPresent()) {
                 resultBanner = Optional.of(checkBanner(bannerFromDb.get(), banner));
                 bannerRepository.save(resultBanner.get());
-            }
+            } else
+                throw new NoSuchElementException("Banner with id " + banner.getId() + " doesn't exist");
 
             Action action = new Action(resultBanner.get().getId(), admin, ActionType.EDIT, getCurrentDate());
 

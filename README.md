@@ -15,7 +15,7 @@
 ``` bash
 mvn clean install -Dmaven.test.skip=true
 ```
-Без игнорирования тестов
+С тестами
 ``` bash
 mvn clean install
 ```

@@ -12,9 +12,13 @@ import ru.trainee.adminpanel.data.model.Action;
 import ru.trainee.adminpanel.data.model.User;
 import ru.trainee.adminpanel.data.repository.ActionRepository;
 import ru.trainee.adminpanel.data.repository.UserRepository;
+import ru.trainee.adminpanel.data.model.ActionType;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.stringContainsInOrder;
 
 
 @RunWith(SpringRunner.class)
@@ -38,10 +42,17 @@ public class DatabaseActionTableTest {
 
         User user = createUser();
 
-        Action action = new Action(1L, user, "DELETE", "2018-12-16 00:00:00");
+        Action action = new Action(1L, user, ActionType.DELETE, "2018-12-16 00:00:00");
         actionRepository.save(action);
 
-        int currentSize = actionRepository.findAll().size();
+        System.out.println(action);
+
+        List<Action> actionList = actionRepository.findAll();
+
+        for (Action action1 : actionList)
+            System.out.println(action1);
+
+        int currentSize = actionList.size();
 
         assertThat(currentSize, is(initialSize + 1));
     }
